@@ -17,6 +17,13 @@ type
   // Déclaration de la fenêtre principale
   TForm2 = class(TForm)
 
+  //déclaration des labels projets
+  Label1: TLabel;
+  Label2: TLabel;
+  Label3: TLabel;
+  Label4: TLabel;
+
+
     // ScrollBox pour afficher plusieurs projets avec barre de défilement
     PanelProjets: TScrollBox;
 
@@ -33,6 +40,8 @@ type
   public
     // Fonction publique qui affiche tous les projets visuellement
     procedure ChargerTousLesProjets;
+    procedure ChargerStatutsProjets;
+
   end;
 
 var
@@ -114,11 +123,74 @@ procedure TForm2.FormCreate(Sender: TObject);
 begin
  // Quand on clique sur Label11, on charge tous les projets
   ChargerTousLesProjets;
+
+  // on charge automatiquement les stats des projets
+  ChargerStatutsProjets;
 end;
 
 procedure TForm2.Label11Click(Sender: TObject);
 begin
  self.close();
+end;
+
+procedure TForm2.ChargerStatutsProjets;
+var
+  encours, termines, enattente, total: Integer;
+  qry: TFDQuery;
+begin
+  // Initialisation des compteurs
+  encours := 0;
+  termines := 0;
+  enattente := 0;
+
+  // Création de la requête
+  qry := TFDQuery.Create(nil);
+  try
+    qry.Connection := FDConnection1;
+
+    // Projets en cours
+    qry.SQL.Text := 'SELECT * FROM projet WHERE statut = :statut';
+    qry.ParamByName('statut').AsString := 'En cours';
+    qry.Open;
+    while not qry.Eof do
+    begin
+      Inc(encours);
+      qry.Next;
+    end;
+    qry.Close;
+
+    // Projets terminés
+    qry.ParamByName('statut').AsString := 'Terminé';
+    qry.Open;
+    while not qry.Eof do
+    begin
+      Inc(termines);
+      qry.Next;
+    end;
+    qry.Close;
+
+    // Projets en attente
+    qry.ParamByName('statut').AsString := 'En attente';
+    qry.Open;
+    while not qry.Eof do
+    begin
+      Inc(enattente);
+      qry.Next;
+    end;
+    qry.Close;
+
+  finally
+    qry.Free;
+  end;
+
+  // Calcul du total
+  total := encours + termines + enattente;
+
+  // Affichage dans les labels
+  Label2.Caption := 'Projets en cours : ' + encours.ToString;
+  Label3.Caption := 'Projets terminés : ' + termines.ToString;
+  Label4.Caption := 'Projets en attente : ' + enattente.ToString;
+  Label1.Caption := 'Total de projets : ' + total.ToString;
 end;
 
 end.
