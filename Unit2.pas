@@ -36,6 +36,8 @@ type
     procedure Label2Click(Sender: TObject);
     procedure Label3Click(Sender: TObject);
     procedure Label4Click(Sender: TObject);
+    procedure Label7Click(Sender: TObject);
+    procedure Label10Click(Sender: TObject);
 
   private
     // Zone privée pour ajouter plus tard des variables ou fonctions internes
@@ -134,6 +136,64 @@ begin
   ChargerStatutsProjets;
 end;
 
+procedure TForm2.Label10Click(Sender: TObject);
+var
+  Qry: TFDQuery;
+  ProjetCard: TFrame3;
+  Y: Integer;
+begin
+  // Nettoyage du ScrollBox
+  while PanelProjets.ControlCount > 0 do
+    PanelProjets.Controls[0].Free;
+
+  Y := 10;
+
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FDConnection1;
+    Qry.SQL.Text := 'SELECT * FROM projet ORDER BY responsable';
+    Qry.Open;
+
+    while not Qry.Eof do
+    begin
+      ProjetCard := TFrame3.Create(Self);
+      ProjetCard.Name := '';
+      ProjetCard.Parent := PanelProjets;
+      ProjetCard.Top := Y;
+      ProjetCard.Left := 10;
+      ProjetCard.Width := PanelProjets.ClientWidth - 20;
+      ProjetCard.Height := 80;
+      Y := Y + ProjetCard.Height + 10;
+
+      ProjetCard.Label1.Caption := Qry.FieldByName('titre').AsString;
+      ProjetCard.Label2.Caption := 'Responsable : ' + Qry.FieldByName('responsable').AsString;
+      ProjetCard.Label3.Caption := Format('%s → %s', [
+        Qry.FieldByName('date_debut').AsString,
+        Qry.FieldByName('date_fin').AsString
+      ]);
+      ProjetCard.Label4.Caption := Qry.FieldByName('statut').AsString;
+
+      if Qry.FieldByName('statut').AsString = 'En cours' then
+        ProjetCard.Panel1.Color := $0066FF
+      else if Qry.FieldByName('statut').AsString = 'Terminé' then
+        ProjetCard.Panel1.Color := $99CCFF
+      else if Qry.FieldByName('statut').AsString = 'En attente' then
+        ProjetCard.Panel1.Color := $CCE5E5;
+
+      Qry.Next;
+    end;
+
+    PanelProjets.VertScrollBar.Position := 0;
+    PanelProjets.AutoScroll := False;
+    PanelProjets.AutoScroll := True;
+    PanelProjets.Realign;
+    PanelProjets.Invalidate;
+
+  finally
+    Qry.Free;
+  end;
+end;
+
 procedure TForm2.Label11Click(Sender: TObject);
 begin
  self.close();
@@ -152,6 +212,66 @@ end;
 procedure TForm2.Label4Click(Sender: TObject);
 begin
   AfficherProjetsParStatut('En attente');
+end;
+
+procedure TForm2.Label7Click(Sender: TObject);
+var
+  Qry: TFDQuery;
+  ProjetCard: TFrame3;
+  Y: Integer;
+begin
+  // Nettoyage du ScrollBox
+  while PanelProjets.ControlCount > 0 do
+    PanelProjets.Controls[0].Free;
+
+  Y := 10;
+
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FDConnection1;
+    Qry.SQL.Text := 'SELECT * FROM projet';
+    Qry.Open;
+
+    while not Qry.Eof do
+    begin
+      ProjetCard := TFrame3.Create(Self);
+      ProjetCard.Name := '';
+      ProjetCard.Parent := PanelProjets;
+      ProjetCard.Top := Y;
+      ProjetCard.Left := 10;
+      ProjetCard.Width := PanelProjets.ClientWidth - 20;
+      ProjetCard.Height := 80;
+      Y := Y + ProjetCard.Height + 10;
+
+      ProjetCard.Label1.Caption := Qry.FieldByName('titre').AsString;
+      ProjetCard.Label2.Caption := 'Responsable : ' + Qry.FieldByName('responsable').AsString;
+      ProjetCard.Label3.Caption := Format('%s → %s', [
+        Qry.FieldByName('date_debut').AsString,
+        Qry.FieldByName('date_fin').AsString
+      ]);
+      ProjetCard.Label4.Caption := Qry.FieldByName('statut').AsString;
+
+      // Coloration selon statut (optionnel)
+      if Qry.FieldByName('statut').AsString = 'En cours' then
+        ProjetCard.Panel1.Color := $0066FF
+      else if Qry.FieldByName('statut').AsString = 'Terminé' then
+        ProjetCard.Panel1.Color := $99CCFF
+      else if Qry.FieldByName('statut').AsString = 'En attente' then
+        ProjetCard.Panel1.Color := $CCE5E5;
+
+      Qry.Next;
+    end;
+
+    // Remise à zéro du scroll et mise à jour visuelle
+    PanelProjets.VertScrollBar.Position := 0;
+    PanelProjets.AutoScroll := False;
+    PanelProjets.AutoScroll := True;
+    PanelProjets.Realign;
+    PanelProjets.Invalidate;
+
+  finally
+    Qry.Free;
+  end;
 end;
 
 procedure TForm2.ChargerStatutsProjets;
