@@ -33,6 +33,9 @@ type
     // Événement : lorsqu'on clique sur un label (ex: bouton de test)
     procedure Label11Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure Label2Click(Sender: TObject);
+    procedure Label3Click(Sender: TObject);
+    procedure Label4Click(Sender: TObject);
 
   private
     // Zone privée pour ajouter plus tard des variables ou fonctions internes
@@ -41,11 +44,13 @@ type
     // Fonction publique qui affiche tous les projets visuellement
     procedure ChargerTousLesProjets;
     procedure ChargerStatutsProjets;
+    procedure AfficherProjetsParStatut(const StatutFiltre: string);
 
   end;
 
 var
   Form2: TForm2;
+
 
 implementation
 
@@ -121,8 +126,9 @@ end;
   ====================================================== }
 procedure TForm2.FormCreate(Sender: TObject);
 begin
- // Quand on clique sur Label11, on charge tous les projets
-  ChargerTousLesProjets;
+ // Quand on clique sur Label11, on charge tous les projets  une seule fois
+     ChargerTousLesProjets;
+
 
   // on charge automatiquement les stats des projets
   ChargerStatutsProjets;
@@ -133,15 +139,35 @@ begin
  self.close();
 end;
 
+procedure TForm2.Label2Click(Sender: TObject);
+begin
+  AfficherProjetsParStatut('En cours');
+end;
+
+procedure TForm2.Label3Click(Sender: TObject);
+begin
+  AfficherProjetsParStatut('Terminé');
+end;
+
+procedure TForm2.Label4Click(Sender: TObject);
+begin
+  AfficherProjetsParStatut('En attente');
+end;
+
 procedure TForm2.ChargerStatutsProjets;
 var
   encours, termines, enattente, total: Integer;
   qry: TFDQuery;
 begin
+
   // Initialisation des compteurs
   encours := 0;
   termines := 0;
   enattente := 0;
+
+  // Nettoyage complet du ScrollBox
+  while PanelProjets.ControlCount > 0 do
+  PanelProjets.Controls[0].Free;
 
   // Création de la requête
   qry := TFDQuery.Create(nil);
@@ -191,6 +217,71 @@ begin
   Label3.Caption := 'Projets terminés : ' + termines.ToString;
   Label4.Caption := 'Projets en attente : ' + enattente.ToString;
   Label1.Caption := 'Total de projets : ' + total.ToString;
+end;
+
+
+procedure TForm2.AfficherProjetsParStatut(const StatutFiltre: string);
+var
+  Qry: TFDQuery;
+  ProjetCard: TFrame3;
+  Y: Integer;
+begin
+  // Nettoyage complet du ScrollBox
+  while PanelProjets.ControlCount > 0 do
+  PanelProjets.Controls[0].Free;
+
+  Y := 10;
+
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FDConnection1;
+    Qry.SQL.Text := 'SELECT * FROM projet WHERE statut = :statut';
+    Qry.ParamByName('statut').AsString := StatutFiltre;
+    Qry.Open;
+
+    while not Qry.Eof do
+    begin
+      // Création dynamique d'une "carte" projet
+      ProjetCard := TFrame3.Create(Self);
+      ProjetCard.Name := ''; // éviter les erreurs de nom en double
+      ProjetCard.Parent := PanelProjets;
+
+      ProjetCard.Top := Y;
+      ProjetCard.Left := 10;
+      ProjetCard.Width := PanelProjets.ClientWidth - 20;
+      ProjetCard.Height := 80;
+
+      Y := Y + ProjetCard.Height + 10;
+
+      // Remplissage avec les données SQL
+      ProjetCard.Label1.Caption := Qry.FieldByName('titre').AsString;
+      ProjetCard.Label2.Caption := 'Responsable : ' + Qry.FieldByName('responsable').AsString;
+      ProjetCard.Label3.Caption := Format('%s → %s', [
+        Qry.FieldByName('date_debut').AsString,
+        Qry.FieldByName('date_fin').AsString
+      ]);
+      ProjetCard.Label4.Caption := Qry.FieldByName('statut').AsString;
+
+      // Option : couleur selon statut
+      if StatutFiltre = 'En cours' then
+        ProjetCard.Panel1.Color := $0066FF
+      else if StatutFiltre = 'Terminé' then
+        ProjetCard.Panel1.Color := $99CCFF
+      else if StatutFiltre = 'En attente' then
+        ProjetCard.Panel1.Color := $CCE5E5;
+
+      Qry.Next;
+
+    end;
+        PanelProjets.VertScrollBar.Position := 0;
+PanelProjets.AutoScroll := False;
+PanelProjets.AutoScroll := True;
+PanelProjets.Realign;
+PanelProjets.Invalidate;
+  finally
+    Qry.Free;
+  ;
+  end;
 end;
 
 end.
