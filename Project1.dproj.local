@@ -2,11 +2,21 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2025/06/10 13:14:41.000.040,=D:\Unit1.pas</Transaction>
-    <Transaction>2025/06/10 13:15:02.000.513,D:\Unit1.pas=D:\Delphi\Gestion2projet2.0\Unit1.pas</Transaction>
-    <Transaction>2025/06/10 13:15:02.000.513,D:\Unit1.dfm=D:\Delphi\Gestion2projet2.0\Unit1.dfm</Transaction>
-    <Transaction>2025/06/10 13:15:05.000.308,D:\Project1.dproj=D:\Delphi\Gestion2projet2.0\Project1.dproj</Transaction>
+    <Transaction>2025/06/10 13:15:02.000.513,D:\Delphi\Gestion2projet2.0\Unit1.dfm=D:\Unit1.dfm</Transaction>
+    <Transaction>2025/06/10 13:15:02.000.513,D:\Delphi\Gestion2projet2.0\Unit1.pas=D:\Unit1.pas</Transaction>
+    <Transaction>2025/06/10 13:15:05.000.308,D:\Delphi\Gestion2projet2.0\Project1.dproj=D:\Project1.dproj</Transaction>
     <Transaction>2025/06/11 14:40:43.000.727,=D:\Delphi\Gestion2projet2.0\Unit3.pas</Transaction>
     <Transaction>2025/06/11 15:44:32.000.373,D:\Delphi\Gestion2projet2.0\Unit1.pas=</Transaction>
-    <Transaction>2025/06/11 16:22:39.797,D:\Delphi\G2P3.0\Project1.dproj=D:\Delphi\Gestion2projet2.0\Project1.dproj</Transaction>
+    <Transaction>2025/06/11 16:22:39.000.797,D:\Delphi\Gestion2projet2.0\Project1.dproj=D:\Delphi\G2P3.0\Project1.dproj</Transaction>
+    <Transaction>2025/06/12 13:35:28.943,D:\Delphi\G2P3.0\Unit2.dfm=D:\Delphi\Gestion2projet2.0\Unit2.dfm</Transaction>
+    <Transaction>2025/06/12 13:35:28.943,D:\Delphi\G2P3.0\Unit2.pas=D:\Delphi\Gestion2projet2.0\Unit2.pas</Transaction>
+    <Transaction>2025/06/12 14:10:39.230,=D:\Delphi\G2P3.0\Unit1.pas</Transaction>
+    <Transaction>2025/06/12 14:11:05.766,D:\Delphi\G2P3.0\unit4.dfm=D:\Delphi\G2P3.0\Unit1.dfm</Transaction>
+    <Transaction>2025/06/12 14:11:05.766,D:\Delphi\G2P3.0\unit4.pas=D:\Delphi\G2P3.0\Unit1.pas</Transaction>
+    <Transaction>2025/06/12 14:13:17.868,D:\Delphi\G2P3.0\unit4.pas=</Transaction>
+    <Transaction>2025/06/12 14:13:45.988,=D:\Delphi\G2P3.0\Unit1.pas</Transaction>
+    <Transaction>2025/06/12 14:36:01.988,=D:\Delphi\G2P3.0\Unit5.pas</Transaction>
+    <Transaction>2025/06/12 15:10:36.252,=D:\Delphi\G2P3.0\Unit6.pas</Transaction>
+    <Transaction>2025/06/13 13:38:42.035,=D:\Delphi\G2P3.0\Unit7.pas</Transaction>
   </Transactions>
 </BorlandProject>

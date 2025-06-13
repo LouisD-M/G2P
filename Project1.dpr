@@ -2,8 +2,12 @@
 
 uses
   Vcl.Forms,
-  Unit2 in '..\Gestion2projet2.0\Unit2.pas' {Form2},
-  Unit3 in '..\Gestion2projet2.0\Unit3.pas' {Frame3: TFrame};
+  Unit2 in 'Unit2.pas' {Form2},
+  Unit3 in '..\Gestion2projet2.0\Unit3.pas' {Frame3: TFrame},
+  Unit1 in 'Unit1.pas' {Form1},
+  Unit5 in 'Unit5.pas' {Form5},
+  Unit6 in 'Unit6.pas' {Form6},
+  Unit7 in 'Unit7.pas' {Form7};
 
 {$R *.res}
 
@@ -13,6 +17,10 @@ begin
 
   // Ceci lance ton dashboard
   Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TForm5, Form5);
+  Application.CreateForm(TForm6, Form6);
+  Application.CreateForm(TForm7, Form7);
   Application.Run;
 end.
 

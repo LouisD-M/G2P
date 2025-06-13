@@ -29,6 +29,10 @@ type
 
     // Connexion à la base de données SQLite
     FDConnection1: TFDConnection;
+    Panel16: TPanel;
+    Label12: TLabel;
+    Panel8: TPanel;
+    Label5: TLabel;
 
     // Événement : lorsqu'on clique sur un label (ex: bouton de test)
     procedure Label11Click(Sender: TObject);
@@ -40,8 +44,9 @@ type
     procedure Label10Click(Sender: TObject);
     procedure Label9Click(Sender: TObject);
     procedure Label8Click(Sender: TObject);
-    procedure Label5Click(Sender: TObject);
+    procedure Label12Click(Sender: TObject);
     procedure Label6Click(Sender: TObject);
+    procedure Label5Click(Sender: TObject);
 
 
   private
@@ -67,7 +72,7 @@ implementation
 
 {$R *.dfm}
 
-uses Unit6; // Lie le fichier visuel .dfm avec ce code
+uses Unit6, Unit7; // Lie le fichier visuel .dfm avec ce code
 
 { ==============================================================
   Cette fonction va chercher tous les projets dans la base SQLite
@@ -118,13 +123,12 @@ begin
       ]);
       ProjetCard.Label4.Caption := Qry.FieldByName('statut').AsString;
 
-      // Couleur selon le statut
       if Qry.FieldByName('statut').AsString = 'En cours' then
-        ProjetCard.Panel1.Color := $0066FF
-      else if Qry.FieldByName('statut').AsString = 'Terminé' then
-        ProjetCard.Panel1.Color := $99CCFF
-      else if Qry.FieldByName('statut').AsString = 'En attente' then
-        ProjetCard.Panel1.Color := $CCE5E5;
+          ProjetCard.Panel1.Color := $00502D02
+        else if Qry.FieldByName('statut').AsString = 'Terminé' then
+          ProjetCard.Panel1.Color := $00FFA90A
+        else if Qry.FieldByName('statut').AsString = 'En attente' then
+          ProjetCard.Panel1.Color := $004E5C60;
 
 
 
@@ -141,8 +145,8 @@ end;
   ====================================================== }
 procedure TForm2.FormCreate(Sender: TObject);
 begin
- // Quand on clique sur Label11, on charge tous les projets  une seule fois
-     ChargerTousLesProjets;
+
+ ChargerTousLesProjets;
 
 
   // on charge automatiquement les stats des projets
@@ -188,12 +192,12 @@ begin
       ]);
       ProjetCard.Label4.Caption := Qry.FieldByName('statut').AsString;
 
-      if Qry.FieldByName('statut').AsString = 'En cours' then
-        ProjetCard.Panel1.Color := $0066FF
-      else if Qry.FieldByName('statut').AsString = 'Terminé' then
-        ProjetCard.Panel1.Color := $99CCFF
-      else if Qry.FieldByName('statut').AsString = 'En attente' then
-        ProjetCard.Panel1.Color := $CCE5E5;
+         if Qry.FieldByName('statut').AsString = 'En cours' then
+          ProjetCard.Panel1.Color := $00502D02
+        else if Qry.FieldByName('statut').AsString = 'Terminé' then
+          ProjetCard.Panel1.Color := $00FFA90A
+        else if Qry.FieldByName('statut').AsString = 'En attente' then
+          ProjetCard.Panel1.Color := $004E5C60;
 
 
       Qry.Next;
@@ -232,6 +236,13 @@ end;
 
 procedure TForm2.Label5Click(Sender: TObject);
 begin
+  Form7.ShowModal;
+  ChargerStatutsProjets;
+
+end;
+
+procedure TForm2.Label12Click(Sender: TObject);
+begin
   Form6.ShowModal;
   ChargerStatutsProjets;
 
@@ -239,7 +250,9 @@ end;
 
 procedure TForm2.Label6Click(Sender: TObject);
 begin
+
 ChargerStatutsProjets;
+ChargerTousLesProjets;
 end;
 
 procedure TForm2.Label7Click(Sender: TObject);
@@ -280,12 +293,12 @@ begin
       ProjetCard.Label4.Caption := Qry.FieldByName('statut').AsString;
 
       // Coloration selon statut (optionnel)
-      if Qry.FieldByName('statut').AsString = 'En cours' then
-        ProjetCard.Panel1.Color := $0066FF
-      else if Qry.FieldByName('statut').AsString = 'Terminé' then
-        ProjetCard.Panel1.Color := $99CCFF
-      else if Qry.FieldByName('statut').AsString = 'En attente' then
-        ProjetCard.Panel1.Color := $CCE5E5;
+        if Qry.FieldByName('statut').AsString = 'En cours' then
+          ProjetCard.Panel1.Color := $00502D02
+        else if Qry.FieldByName('statut').AsString = 'Terminé' then
+          ProjetCard.Panel1.Color := $00FFA90A
+        else if Qry.FieldByName('statut').AsString = 'En attente' then
+          ProjetCard.Panel1.Color := $004E5C60;
 
       Qry.Next;
     end;
@@ -398,11 +411,11 @@ begin
         ProjetCard.Label4.Caption := Qry.FieldByName('statut').AsString;
 
         if Qry.FieldByName('statut').AsString = 'En cours' then
-          ProjetCard.Panel1.Color := $0066FF
+          ProjetCard.Panel1.Color := $00502D02
         else if Qry.FieldByName('statut').AsString = 'Terminé' then
-          ProjetCard.Panel1.Color := $99CCFF
+          ProjetCard.Panel1.Color := $00FFA90A
         else if Qry.FieldByName('statut').AsString = 'En attente' then
-          ProjetCard.Panel1.Color := $CCE5E5;
+          ProjetCard.Panel1.Color := $004E5C60;
 
 
         Qry.Next;
@@ -532,16 +545,13 @@ begin
         Qry.FieldByName('date_fin').AsString
       ]);
       ProjetCard.Label4.Caption := Qry.FieldByName('statut').AsString;
-
-      // Option : couleur selon statut
-      if StatutFiltre = 'En cours' then
-        ProjetCard.Panel1.Color := $0066FF
-      else if StatutFiltre = 'Terminé' then
-        ProjetCard.Panel1.Color := $99CCFF
-      else if StatutFiltre = 'En attente' then
-        ProjetCard.Panel1.Color := $CCE5E5;
-
-
+  
+          if Qry.FieldByName('statut').AsString = 'En cours' then
+          ProjetCard.Panel1.Color := $00502D02
+        else if Qry.FieldByName('statut').AsString = 'Terminé' then
+          ProjetCard.Panel1.Color := $00FFA90A
+        else if Qry.FieldByName('statut').AsString = 'En attente' then
+          ProjetCard.Panel1.Color := $004E5C60;
 
       Qry.Next;
 
