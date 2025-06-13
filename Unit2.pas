@@ -11,7 +11,7 @@ uses
   FireDAC.Phys, FireDAC.Phys.SQLite, FireDAC.Stan.Pool, Data.DB,
   Unit3, // On importe le design de la "carte" projet (TFrame3)
   FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.Phys.Intf,
-  FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat, Unit1;
+  FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat, Unit1, unit5;
 
 type
   // Déclaration de la fenêtre principale
@@ -39,14 +39,22 @@ type
     procedure Label7Click(Sender: TObject);
     procedure Label10Click(Sender: TObject);
     procedure Label9Click(Sender: TObject);
+    procedure Label8Click(Sender: TObject);
+    procedure Label5Click(Sender: TObject);
+    procedure Label6Click(Sender: TObject);
+
 
   private
+     ProjetSelectionne: string;  // le titre du projet cliqué pour suppression
+
     // Zone privée pour ajouter plus tard des variables ou fonctions internes
 
   public
     // Fonction publique qui affiche tous les projets visuellement
     procedure ChargerTousLesProjets;
     procedure ChargerStatutsProjets;
+
+
     procedure AfficherProjetsParStatut(const StatutFiltre: string);
 
   end;
@@ -57,7 +65,9 @@ var
 
 implementation
 
-{$R *.dfm} // Lie le fichier visuel .dfm avec ce code
+{$R *.dfm}
+
+uses Unit6; // Lie le fichier visuel .dfm avec ce code
 
 { ==============================================================
   Cette fonction va chercher tous les projets dans la base SQLite
@@ -116,6 +126,8 @@ begin
       else if Qry.FieldByName('statut').AsString = 'En attente' then
         ProjetCard.Panel1.Color := $CCE5E5;
 
+
+
       Qry.Next; // Passe au projet suivant
     end;
   finally
@@ -135,6 +147,8 @@ begin
 
   // on charge automatiquement les stats des projets
   ChargerStatutsProjets;
+
+
 end;
 
 procedure TForm2.Label10Click(Sender: TObject);
@@ -181,6 +195,7 @@ begin
       else if Qry.FieldByName('statut').AsString = 'En attente' then
         ProjetCard.Panel1.Color := $CCE5E5;
 
+
       Qry.Next;
     end;
 
@@ -213,6 +228,18 @@ end;
 procedure TForm2.Label4Click(Sender: TObject);
 begin
   AfficherProjetsParStatut('En attente');
+end;
+
+procedure TForm2.Label5Click(Sender: TObject);
+begin
+  Form6.ShowModal;
+  ChargerStatutsProjets;
+
+end;
+
+procedure TForm2.Label6Click(Sender: TObject);
+begin
+ChargerStatutsProjets;
 end;
 
 procedure TForm2.Label7Click(Sender: TObject);
@@ -275,6 +302,52 @@ begin
   end;
 end;
 
+procedure TForm2.Label8Click(Sender: TObject);
+var
+  i: Integer;
+  titre: string;
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FDConnection1;
+
+    for i := 0 to PanelProjets.ControlCount - 1 do
+    begin
+      if PanelProjets.Controls[i] is TFrame3 then
+      begin
+        // Récupérer le titre depuis la carte projet affichée
+        titre := TFrame3(PanelProjets.Controls[i]).Label1.Caption;
+
+        // Rechercher le projet exact dans la base
+        Qry.Close;
+        Qry.SQL.Text := 'SELECT * FROM projet WHERE titre = :titre';
+        Qry.ParamByName('titre').AsString := titre;
+        Qry.Open;
+
+        // Si trouvé, ouvrir Form5 avec les données
+        if not Qry.IsEmpty then
+        begin
+          Form5.LabelTitre.Caption := Qry.FieldByName('titre').AsString;
+          Form5.LabelResponsable.Caption := 'Responsable : ' + Qry.FieldByName('responsable').AsString;
+          Form5.LabelDate.Caption := Format('%s → %s', [
+            Qry.FieldByName('date_debut').AsString,
+            Qry.FieldByName('date_fin').AsString
+          ]);
+          Form5.LabelStatut.Caption := 'Statut : ' + Qry.FieldByName('statut').AsString;
+          Form5.LabelPriorite.Caption := 'Priorité : ' + Qry.FieldByName('priorite').AsString;
+          Form5.LabelCout_Reel.Caption := 'Coût réel : ' + Qry.FieldByName('cout_reel').AsString;
+          Form5.LabelCommentaire.Caption := 'Commentaire : ' + Qry.FieldByName('commentaires').AsString;
+
+          Form5.ShowModal;
+        end;
+      end;
+    end;
+  finally
+    Qry.Free;
+  end;
+end;
+
 procedure TForm2.Label9Click(Sender: TObject);
 var
   recherche: string;
@@ -331,6 +404,7 @@ begin
         else if Qry.FieldByName('statut').AsString = 'En attente' then
           ProjetCard.Panel1.Color := $CCE5E5;
 
+
         Qry.Next;
       end;
 
@@ -346,6 +420,10 @@ begin
     end;
   end;
 end;
+
+
+
+
 
 procedure TForm2.ChargerStatutsProjets;
 var
@@ -463,6 +541,8 @@ begin
       else if StatutFiltre = 'En attente' then
         ProjetCard.Panel1.Color := $CCE5E5;
 
+
+
       Qry.Next;
 
     end;
@@ -476,6 +556,9 @@ PanelProjets.Invalidate;
   ;
   end;
 end;
+
+
+
 
 end.
 
