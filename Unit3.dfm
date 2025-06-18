@@ -1,34 +1,36 @@
 object Frame3: TFrame3
   Left = 0
   Top = 0
-  Width = 531
+  Width = 1037
   Height = 325
   TabOrder = 0
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 531
+    Width = 1037
     Height = 325
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 531
     object Shape1: TShape
       Left = 0
       Top = 33
-      Width = 531
+      Width = 1037
       Height = 292
       Align = alClient
       Pen.Style = psClear
       Shape = stRoundRect
       ExplicitTop = 34
+      ExplicitWidth = 531
       ExplicitHeight = 291
     end
     object Label1: TLabel
       Left = 0
       Top = 0
-      Width = 531
+      Width = 1037
       Height = 33
       Align = alTop
       Alignment = taCenter
@@ -57,8 +59,8 @@ object Frame3: TFrame3
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 345
-      Top = 30
+      Left = 443
+      Top = 33
       Width = 65
       Height = 24
       Caption = 'Statut :'
@@ -70,11 +72,24 @@ object Frame3: TFrame3
       ParentFont = False
     end
     object Label4: TLabel
-      Left = 0
-      Top = 76
+      Left = 610
+      Top = 33
       Width = 54
       Height = 24
       Caption = 'date : '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'Roboto'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label5: TLabel
+      Left = 0
+      Top = 55
+      Width = 116
+      Height = 24
+      Caption = 'Description : '
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -20

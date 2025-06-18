@@ -11,6 +11,7 @@ object Form6: TForm6
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  Position = poScreenCenter
   TextHeight = 15
   object Panel1: TPanel
     Left = 0
@@ -22,10 +23,6 @@ object Form6: TForm6
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 208
-    ExplicitTop = 240
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object Panel2: TPanel
       Left = 0
       Top = 0
@@ -36,7 +33,6 @@ object Form6: TForm6
       Color = 13758703
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 640
       object Shape1: TShape
         AlignWithMargins = True
         Left = 20
@@ -84,10 +80,6 @@ object Form6: TForm6
       Color = 13758703
       ParentBackground = False
       TabOrder = 1
-      ExplicitLeft = 232
-      ExplicitTop = 224
-      ExplicitWidth = 185
-      ExplicitHeight = 41
       object Shape2: TShape
         AlignWithMargins = True
         Left = 20
@@ -214,42 +206,42 @@ object Form6: TForm6
         Left = 287
         Top = 120
         Width = 434
-        Height = 39
+        Height = 23
         TabOrder = 0
       end
       object Edit3: TEdit
         Left = 287
         Top = 165
         Width = 434
-        Height = 39
+        Height = 23
         TabOrder = 1
       end
       object Edit5: TEdit
         Left = 287
         Top = 255
         Width = 434
-        Height = 39
+        Height = 23
         TabOrder = 2
       end
       object Edit6: TEdit
         Left = 287
         Top = 300
         Width = 434
-        Height = 39
+        Height = 23
         TabOrder = 3
       end
       object Edit7: TEdit
         Left = 287
         Top = 345
         Width = 434
-        Height = 39
+        Height = 23
         TabOrder = 4
       end
       object Edit8: TEdit
         Left = 287
         Top = 390
         Width = 434
-        Height = 39
+        Height = 23
         TabOrder = 5
       end
       object Panel4: TPanel
@@ -369,7 +361,7 @@ object Form6: TForm6
         Left = 143
         Top = 67
         Width = 578
-        Height = 39
+        Height = 23
         TabOrder = 9
       end
     end

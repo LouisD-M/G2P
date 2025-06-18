@@ -2555,7 +2555,6 @@ object Form5: TForm5
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
-    ExplicitHeight = 418
     object LabelStatut: TLabel
       Left = 0
       Top = 49
@@ -2631,20 +2630,20 @@ object Form5: TForm5
       ParentFont = False
       ExplicitWidth = 148
     end
-    object LabelCommentaire: TLabel
+    object LabelDescription: TLabel
       Left = 0
-      Top = 235
+      Top = 250
       Width = 1400
       Height = 15
       Align = alTop
-      Caption = 'LabelTitre'
+      Caption = 'LabelDescription'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
       Font.Name = 'Roboto'
       Font.Style = []
       ParentFont = False
-      ExplicitWidth = 58
+      ExplicitWidth = 97
     end
     object Shape1: TShape
       Left = 0
@@ -2694,6 +2693,21 @@ object Form5: TForm5
       ExplicitLeft = -16
       ExplicitTop = 170
       ExplicitWidth = 1200
+    end
+    object LabelCommentaire: TLabel
+      Left = 0
+      Top = 235
+      Width = 1400
+      Height = 15
+      Align = alTop
+      Caption = 'LabelTitre'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Roboto'
+      Font.Style = []
+      ParentFont = False
+      ExplicitTop = 299
     end
   end
   object PrintDialog1: TPrintDialog

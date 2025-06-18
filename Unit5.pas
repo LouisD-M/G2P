@@ -16,7 +16,8 @@ type
     LabelStatut: TLabel;
     LabelPriorite: TLabel;
     LabelCout_Reel: TLabel;
-    LabelCommentaire: TLabel;
+    LabelDescription: TLabel;
+    LabelCommentaire: Tlabel;
     BtnImprimer: TButton;
     PrintDialog1: TPrintDialog;
     Panel1: TPanel;

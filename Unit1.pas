@@ -13,6 +13,8 @@ type
     Shape1: TShape;
     Panel1: TPanel;
     Label1: TLabel;
+    Button2: TButton;
+    procedure Button2Click(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -25,5 +27,10 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+self.Close;
+end;
 
 end.

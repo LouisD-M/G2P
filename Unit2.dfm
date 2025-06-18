@@ -146,7 +146,8 @@ object Form2: TForm2
         ParentFont = False
         Layout = tlCenter
         OnClick = Label9Click
-        ExplicitTop = 450
+        ExplicitWidth = 222
+        ExplicitHeight = 48
       end
     end
     object Panel13: TPanel
@@ -167,7 +168,7 @@ object Form2: TForm2
         Height = 89
         Align = alClient
         Alignment = taCenter
-        Caption = 'UTILISATEURS'
+        Caption = 'PILOTES'
         Color = clNavy
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
@@ -178,7 +179,7 @@ object Form2: TForm2
         ParentFont = False
         Layout = tlCenter
         OnClick = Label10Click
-        ExplicitWidth = 268
+        ExplicitWidth = 157
         ExplicitHeight = 48
       end
     end
@@ -209,8 +210,8 @@ object Form2: TForm2
         ParentFont = False
         Layout = tlCenter
         OnClick = Label8Click
-        ExplicitLeft = 6
-        ExplicitTop = -40
+        ExplicitWidth = 148
+        ExplicitHeight = 48
       end
     end
     object Panel15: TPanel
@@ -240,8 +241,8 @@ object Form2: TForm2
         ParentFont = False
         Layout = tlCenter
         OnClick = Label11Click
-        ExplicitLeft = -2
-        ExplicitTop = 4
+        ExplicitWidth = 160
+        ExplicitHeight = 48
       end
     end
     object Panel16: TPanel
@@ -256,7 +257,6 @@ object Form2: TForm2
       Color = 5254402
       ParentBackground = False
       TabOrder = 6
-      ExplicitTop = 300
       object Label12: TLabel
         Left = 0
         Top = 0
@@ -293,8 +293,6 @@ object Form2: TForm2
       ParentBackground = False
       ParentFont = False
       TabOrder = 7
-      ExplicitLeft = -3
-      ExplicitTop = 282
       object Label5: TLabel
         Left = 0
         Top = 0
@@ -311,7 +309,8 @@ object Form2: TForm2
         ParentFont = False
         Layout = tlCenter
         OnClick = Label5Click
-        ExplicitHeight = 42
+        ExplicitWidth = 182
+        ExplicitHeight = 48
       end
     end
   end
@@ -614,7 +613,7 @@ object Form2: TForm2
   end
   object FDConnection1: TFDConnection
     Params.Strings = (
-      'Database=N:\G2P IFMS\projet.sdb'
+      'Database=N:\G2P\projet.sbd'
       'DriverID=SQLite')
     Left = 40
     Top = 104

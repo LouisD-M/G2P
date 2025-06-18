@@ -1,45 +1,47 @@
 object Form7: TForm7
   Left = 0
   Top = 0
-  BorderStyle = bsSingle
+  BorderStyle = bsNone
   Caption = 'Form7'
-  ClientHeight = 691
-  ClientWidth = 802
+  ClientHeight = 730
+  ClientWidth = 818
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  Position = poScreenCenter
   OnCreate = FormCreate
   TextHeight = 15
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 802
-    Height = 691
+    Width = 818
+    Height = 730
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = -178
-    ExplicitTop = -250
+    ExplicitWidth = 802
+    ExplicitHeight = 691
     object Panel2: TPanel
       Left = 0
       Top = 0
-      Width = 802
+      Width = 818
       Height = 150
       Align = alTop
       BevelOuter = bvNone
       Color = 13758703
       ParentBackground = False
       TabOrder = 0
+      ExplicitWidth = 802
       object Shape1: TShape
         AlignWithMargins = True
         Left = 20
         Top = 20
-        Width = 762
+        Width = 778
         Height = 110
         Margins.Left = 20
         Margins.Top = 20
@@ -56,7 +58,7 @@ object Form7: TForm7
       object Label1: TLabel
         Left = 0
         Top = 0
-        Width = 802
+        Width = 818
         Height = 150
         Align = alClient
         Alignment = taCenter
@@ -75,23 +77,21 @@ object Form7: TForm7
     object Panel3: TPanel
       Left = 0
       Top = 150
-      Width = 802
-      Height = 541
+      Width = 818
+      Height = 580
       Align = alClient
       BevelOuter = bvNone
       Color = 13758703
       ParentBackground = False
       TabOrder = 1
-      ExplicitLeft = 232
-      ExplicitTop = 224
-      ExplicitWidth = 185
-      ExplicitHeight = 41
+      ExplicitWidth = 802
+      ExplicitHeight = 541
       object Shape2: TShape
         AlignWithMargins = True
         Left = 20
         Top = 20
-        Width = 762
-        Height = 501
+        Width = 778
+        Height = 540
         Margins.Left = 20
         Margins.Top = 20
         Margins.Right = 20
@@ -342,14 +342,15 @@ object Form7: TForm7
           ParentFont = False
           Layout = tlCenter
           OnClick = Label11Click
-          ExplicitLeft = -64
+          ExplicitWidth = 82
+          ExplicitHeight = 33
         end
         object ComboBox1: TComboBox
           AlignWithMargins = True
           Left = 150
           Top = 75
           Width = 0
-          Height = 0
+          Height = 23
           Margins.Left = 150
           Margins.Top = 75
           Margins.Right = 79
@@ -365,10 +366,6 @@ object Form7: TForm7
             'En cours'
             'Termin'#233
             'En attente')
-          ExplicitLeft = -444
-          ExplicitTop = 55
-          ExplicitWidth = 573
-          ExplicitHeight = 23
         end
       end
       object ComboBoxStatut: TComboBox
@@ -392,7 +389,7 @@ object Form7: TForm7
         AlignWithMargins = True
         Left = 150
         Top = 75
-        Width = 573
+        Width = 589
         Height = 32
         Margins.Left = 150
         Margins.Top = 75
@@ -411,6 +408,7 @@ object Form7: TForm7
           'En cours'
           'Termin'#233
           'En attente')
+        ExplicitWidth = 573
       end
       object Panel6: TPanel
         Left = 350
@@ -464,7 +462,7 @@ object Form7: TForm7
           Left = 150
           Top = 75
           Width = 0
-          Height = 0
+          Height = 23
           Margins.Left = 150
           Margins.Top = 75
           Margins.Right = 79
@@ -480,7 +478,6 @@ object Form7: TForm7
             'En cours'
             'Termin'#233
             'En attente')
-          ExplicitHeight = 23
         end
       end
     end

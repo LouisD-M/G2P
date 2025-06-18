@@ -11,7 +11,8 @@ uses
   FireDAC.Phys, FireDAC.Phys.SQLite, FireDAC.Stan.Pool, Data.DB,
   Unit3, // On importe le design de la "carte" projet (TFrame3)
   FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.Phys.Intf,
-  FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat, Unit1, unit5;
+  FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat, Unit1, unit5,
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.Comp.DataSet;
 
 type
   // Déclaration de la fenêtre principale
@@ -184,13 +185,15 @@ begin
       ProjetCard.Height := 80;
       Y := Y + ProjetCard.Height + 10;
 
-      ProjetCard.Label1.Caption := Qry.FieldByName('titre').AsString;
+       ProjetCard.Label1.Caption := Qry.FieldByName('titre').AsString;
       ProjetCard.Label2.Caption := 'Responsable : ' + Qry.FieldByName('responsable').AsString;
       ProjetCard.Label3.Caption := Format('%s → %s', [
         Qry.FieldByName('date_debut').AsString,
         Qry.FieldByName('date_fin').AsString
       ]);
+      ProjetCard.Label5.Caption := Qry.FieldByName('description').AsString;
       ProjetCard.Label4.Caption := Qry.FieldByName('statut').AsString;
+
 
          if Qry.FieldByName('statut').AsString = 'En cours' then
           ProjetCard.Panel1.Color := $00502D02
@@ -284,13 +287,15 @@ begin
       ProjetCard.Height := 80;
       Y := Y + ProjetCard.Height + 10;
 
-      ProjetCard.Label1.Caption := Qry.FieldByName('titre').AsString;
+     ProjetCard.Label1.Caption := Qry.FieldByName('titre').AsString;
       ProjetCard.Label2.Caption := 'Responsable : ' + Qry.FieldByName('responsable').AsString;
       ProjetCard.Label3.Caption := Format('%s → %s', [
         Qry.FieldByName('date_debut').AsString,
         Qry.FieldByName('date_fin').AsString
       ]);
+      ProjetCard.Label5.Caption := Qry.FieldByName('description').AsString;
       ProjetCard.Label4.Caption := Qry.FieldByName('statut').AsString;
+
 
       // Coloration selon statut (optionnel)
         if Qry.FieldByName('statut').AsString = 'En cours' then
@@ -351,6 +356,9 @@ begin
           Form5.LabelPriorite.Caption := 'Priorité : ' + Qry.FieldByName('priorite').AsString;
           Form5.LabelCout_Reel.Caption := 'Coût réel : ' + Qry.FieldByName('cout_reel').AsString;
           Form5.LabelCommentaire.Caption := 'Commentaire : ' + Qry.FieldByName('commentaires').AsString;
+
+          Form5.LabelDescription.Caption := 'Description ' + Qry.FieldByName('description').AsString;
+
 
           Form5.ShowModal;
         end;
@@ -544,6 +552,7 @@ begin
         Qry.FieldByName('date_debut').AsString,
         Qry.FieldByName('date_fin').AsString
       ]);
+      ProjetCard.Label5.Caption := Qry.FieldByName('description').AsString;
       ProjetCard.Label4.Caption := Qry.FieldByName('statut').AsString;
   
           if Qry.FieldByName('statut').AsString = 'En cours' then

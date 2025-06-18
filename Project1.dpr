@@ -3,7 +3,7 @@
 uses
   Vcl.Forms,
   Unit2 in 'Unit2.pas' {Form2},
-  Unit3 in '..\Gestion2projet2.0\Unit3.pas' {Frame3: TFrame},
+  Unit3 in 'Unit3.pas' {Frame3: TFrame},
   Unit1 in 'Unit1.pas' {Form1},
   Unit5 in 'Unit5.pas' {Form5},
   Unit6 in 'Unit6.pas' {Form6},
