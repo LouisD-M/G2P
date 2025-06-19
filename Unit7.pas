@@ -1,4 +1,4 @@
-unit Unit7;
+ï»¿unit Unit7;
 
 interface
 
@@ -42,15 +42,18 @@ type
     Shape5: TShape;
     Label12: TLabel;
     ComboBox3: TComboBox;
+    ComboBoxLierA: TLabel;
+    ComboBox4: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure Label11Click(Sender: TObject);
     procedure Label12Click(Sender: TObject);
     procedure Label10Click(Sender: TObject);
     procedure ComboBox2Change(Sender: TObject);
+    procedure ComboBox4Change(Sender: TObject);
   private
-    { Déclarations privées }
+    { DÃ©clarations privÃ©es }
   public
-    { Déclarations publiques }
+    { DÃ©clarations publiques }
   end;
 
 var
@@ -65,6 +68,32 @@ implementation
 
 
 
+
+procedure TForm7.ComboBox4Change(Sender: TObject);
+var
+  Qry: TFDQuery;
+begin
+  ComboBox4.Clear;
+  ComboBox4.Items.Add('Aucun projet');
+
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := Form2.FDConnection1;
+    Qry.SQL.Text := 'SELECT titre FROM projet ORDER BY titre';
+    Qry.Open;
+
+    while not Qry.Eof do
+    begin
+      ComboBox4.Items.Add(Qry.FieldByName('titre').AsString);
+      Qry.Next;
+    end;
+
+  finally
+    Qry.Free;
+  end;
+
+  ComboBox4.ItemIndex := 0;
+end;
 
 procedure TForm7.FormCreate(Sender: TObject);
 var
@@ -95,7 +124,7 @@ var
 begin
   if ComboBox2.Text = '' then
   begin
-    ShowMessage('Aucun projet sélectionné.');
+    ShowMessage('Aucun projet sÃ©lectionnÃ©.');
     Exit;
   end;
 
@@ -110,7 +139,8 @@ begin
       'priorite = :priorite, ' +
       'cout_reel = :cout_reel, ' +
       'description = :description, ' +
-      'commentaires = :commentaires ' +
+      'commentaires = :commentaires, ' +
+      'lier_a = :lier_a ' +
       'WHERE titre = :titre';
 
     Qry.ParamByName('responsable').AsString := Edit2.Text;
@@ -122,13 +152,18 @@ begin
     Qry.ParamByName('commentaires').AsString := Edit8.Text;
     Qry.ParamByName('titre').AsString := ComboBox2.Text;
 
+    // âœ… Gestion du champ "lier_a"
+    if ComboBox4.ItemIndex > 0 then
+      Qry.ParamByName('lier_a').AsInteger := Integer(ComboBox4.Items.Objects[ComboBox4.ItemIndex])
+    else
+      Qry.ParamByName('lier_a').Clear; // Aucun projet sÃ©lectionnÃ©
+
     Qry.ExecSQL;
 
-    ShowMessage('Modifications enregistrées avec succès.');
-
+    ShowMessage('Modifications enregistrÃ©es avec succÃ¨s.');
   finally
     Qry.Free;
-    self.Close;
+    Self.Close;
   end;
 end;
 
@@ -141,10 +176,10 @@ procedure TForm7.Label12Click(Sender: TObject);
 var
   Qry: TFDQuery;
 begin
-  // Vérifie si un titre est bien sélectionné
+  // VÃ©rifie si un titre est bien sÃ©lectionnÃ©
   if ComboBox2.Text = '' then
   begin
-    ShowMessage('Aucun projet sélectionné.');
+    ShowMessage('Aucun projet sÃ©lectionnÃ©.');
     Exit;
   end;
 
@@ -152,15 +187,15 @@ begin
   if MessageDlg('Voulez-vous vraiment supprimer "' + ComboBox2.Text + '" ?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
     Exit;
 
-  // Création de la requête
+  // CrÃ©ation de la requÃªte
   Qry := TFDQuery.Create(nil);
   try
-    Qry.Connection := Form2.FDConnection1; // Utilise la même connexion que Form2
+    Qry.Connection := Form2.FDConnection1; // Utilise la mÃªme connexion que Form2
     Qry.SQL.Text := 'DELETE FROM projet WHERE titre = :titre';
     Qry.ParamByName('titre').AsString := ComboBox2.Text;
     Qry.ExecSQL;
 
-    ShowMessage('Projet supprimé avec succès.');
+    ShowMessage('Projet supprimÃ© avec succÃ¨s.');
 
     // Optionnel : vider les champs
     ComboBox2.ItemIndex := -1;

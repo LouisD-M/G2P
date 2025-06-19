@@ -12,6 +12,7 @@ object Form6: TForm6
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poScreenCenter
+  OnCreate = FormCreate
   TextHeight = 15
   object Panel1: TPanel
     Left = 0
@@ -202,6 +203,19 @@ object Form6: TForm6
         Font.Style = []
         ParentFont = False
       end
+      object LabelLierA: TLabel
+        Left = 50
+        Top = 430
+        Width = 105
+        Height = 39
+        Caption = 'Lier '#224' : '
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -33
+        Font.Name = 'Roboto'
+        Font.Style = []
+        ParentFont = False
+      end
       object Edit2: TEdit
         Left = 287
         Top = 120
@@ -245,10 +259,10 @@ object Form6: TForm6
         TabOrder = 5
       end
       object Panel4: TPanel
-        Left = 560
-        Top = 435
-        Width = 137
-        Height = 78
+        Left = 576
+        Top = 456
+        Width = 121
+        Height = 57
         BevelOuter = bvNone
         Color = clWhite
         ParentBackground = False
@@ -257,8 +271,8 @@ object Form6: TForm6
           AlignWithMargins = True
           Left = 10
           Top = 10
-          Width = 117
-          Height = 58
+          Width = 101
+          Height = 37
           Margins.Left = 10
           Margins.Top = 10
           Margins.Right = 10
@@ -275,8 +289,8 @@ object Form6: TForm6
         object Label10: TLabel
           Left = 0
           Top = 0
-          Width = 137
-          Height = 78
+          Width = 121
+          Height = 57
           Align = alClient
           Alignment = taCenter
           Caption = 'Valider'
@@ -288,15 +302,16 @@ object Form6: TForm6
           ParentFont = False
           Layout = tlCenter
           OnClick = Label10Click
-          ExplicitWidth = 84
-          ExplicitHeight = 33
+          ExplicitLeft = 48
+          ExplicitWidth = 137
+          ExplicitHeight = 78
         end
       end
       object Panel5: TPanel
-        Left = 328
-        Top = 435
-        Width = 129
-        Height = 78
+        Left = 336
+        Top = 456
+        Width = 121
+        Height = 57
         BevelOuter = bvNone
         Color = clWhite
         ParentBackground = False
@@ -305,8 +320,8 @@ object Form6: TForm6
           AlignWithMargins = True
           Left = 10
           Top = 10
-          Width = 109
-          Height = 58
+          Width = 101
+          Height = 37
           Margins.Left = 10
           Margins.Top = 10
           Margins.Right = 10
@@ -323,8 +338,8 @@ object Form6: TForm6
         object Label11: TLabel
           Left = 0
           Top = 0
-          Width = 129
-          Height = 78
+          Width = 121
+          Height = 57
           Align = alClient
           Alignment = taCenter
           Caption = 'Quitter'
@@ -363,6 +378,19 @@ object Form6: TForm6
         Width = 578
         Height = 23
         TabOrder = 9
+      end
+      object ComboBoxLierA: TComboBox
+        Left = 287
+        Top = 440
+        Width = 434
+        Height = 22
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Roboto'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 10
       end
     end
   end

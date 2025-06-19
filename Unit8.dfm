@@ -1,0 +1,175 @@
+object Form8: TForm8
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  Caption = 'Form8'
+  ClientHeight = 1080
+  ClientWidth = 1920
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Position = poScreenCenter
+  WindowState = wsMaximized
+  TextHeight = 15
+  object Panel1: TPanel
+    Left = 0
+    Top = 380
+    Width = 1920
+    Height = 700
+    Align = alBottom
+    BevelOuter = bvNone
+    Color = 13758703
+    ParentBackground = False
+    TabOrder = 0
+    ExplicitTop = 180
+    object Shape2: TShape
+      AlignWithMargins = True
+      Left = 20
+      Top = 5
+      Width = 1880
+      Height = 675
+      Margins.Left = 20
+      Margins.Top = 5
+      Margins.Right = 20
+      Margins.Bottom = 20
+      Align = alClient
+      Pen.Style = psClear
+      Shape = stRoundRect
+      ExplicitLeft = 928
+      ExplicitTop = 320
+      ExplicitWidth = 65
+      ExplicitHeight = 65
+    end
+    object Label3: TLabel
+      Left = 58
+      Top = 48
+      Width = 254
+      Height = 33
+      Caption = 'Statistique avanc'#233's :'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -27
+      Font.Name = 'Roboto'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Panel5: TPanel
+      Left = 120
+      Top = 616
+      Width = 121
+      Height = 57
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 0
+      object Shape4: TShape
+        AlignWithMargins = True
+        Left = 10
+        Top = 10
+        Width = 101
+        Height = 37
+        Margins.Left = 10
+        Margins.Top = 10
+        Margins.Right = 10
+        Margins.Bottom = 10
+        Align = alClient
+        Brush.Color = clRed
+        Pen.Style = psClear
+        Shape = stRoundRect
+        ExplicitLeft = 74
+        ExplicitTop = 18
+        ExplicitWidth = 142
+        ExplicitHeight = 50
+      end
+      object Label11: TLabel
+        Left = 0
+        Top = 0
+        Width = 121
+        Height = 57
+        Align = alClient
+        Alignment = taCenter
+        Caption = 'Quitter'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -27
+        Font.Name = 'Roboto'
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+        OnClick = Label11Click
+        ExplicitWidth = 145
+        ExplicitHeight = 41
+      end
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 1920
+    Height = 380
+    Align = alClient
+    BevelOuter = bvNone
+    Color = 13758703
+    ParentBackground = False
+    TabOrder = 1
+    ExplicitLeft = 528
+    ExplicitTop = 208
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object Shape1: TShape
+      AlignWithMargins = True
+      Left = 20
+      Top = 20
+      Width = 1880
+      Height = 340
+      Margins.Left = 20
+      Margins.Top = 20
+      Margins.Right = 20
+      Margins.Bottom = 20
+      Align = alClient
+      Pen.Style = psClear
+      Shape = stRoundRect
+      ExplicitLeft = 336
+      ExplicitTop = 104
+      ExplicitWidth = 65
+      ExplicitHeight = 65
+    end
+    object Label1: TLabel
+      Left = 58
+      Top = 88
+      Width = 151
+      Height = 33
+      Caption = 'Projet Li'#233's : '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -27
+      Font.Name = 'Roboto'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 602
+      Top = 88
+      Width = 208
+      Height = 33
+      Caption = 'Projet Principal : '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -27
+      Font.Name = 'Roboto'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object ComboBox1: TComboBox
+      Left = 58
+      Top = 42
+      Width = 1799
+      Height = 23
+      TabOrder = 0
+      Text = 'ComboBox1'
+    end
+  end
+end

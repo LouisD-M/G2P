@@ -24,8 +24,6 @@ object Form7: TForm7
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 802
-    ExplicitHeight = 691
     object Panel2: TPanel
       Left = 0
       Top = 0
@@ -36,7 +34,6 @@ object Form7: TForm7
       Color = 13758703
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 802
       object Shape1: TShape
         AlignWithMargins = True
         Left = 20
@@ -84,8 +81,6 @@ object Form7: TForm7
       Color = 13758703
       ParentBackground = False
       TabOrder = 1
-      ExplicitWidth = 802
-      ExplicitHeight = 541
       object Shape2: TShape
         AlignWithMargins = True
         Left = 20
@@ -208,6 +203,19 @@ object Form7: TForm7
         Font.Style = []
         ParentFont = False
       end
+      object ComboBoxLierA: TLabel
+        Left = 50
+        Top = 427
+        Width = 97
+        Height = 39
+        Caption = 'Lier '#224' :'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -33
+        Font.Name = 'Roboto'
+        Font.Style = []
+        ParentFont = False
+      end
       object Edit2: TEdit
         Left = 287
         Top = 120
@@ -251,10 +259,10 @@ object Form7: TForm7
         TabOrder = 5
       end
       object Panel4: TPanel
-        Left = 560
-        Top = 435
-        Width = 137
-        Height = 78
+        Left = 592
+        Top = 472
+        Width = 129
+        Height = 65
         BevelOuter = bvNone
         Color = clWhite
         ParentBackground = False
@@ -263,8 +271,8 @@ object Form7: TForm7
           AlignWithMargins = True
           Left = 10
           Top = 10
-          Width = 117
-          Height = 58
+          Width = 109
+          Height = 45
           Margins.Left = 10
           Margins.Top = 10
           Margins.Right = 10
@@ -281,8 +289,8 @@ object Form7: TForm7
         object Label10: TLabel
           Left = 0
           Top = 0
-          Width = 137
-          Height = 78
+          Width = 129
+          Height = 65
           Align = alClient
           Alignment = taCenter
           Caption = 'Valider'
@@ -299,10 +307,10 @@ object Form7: TForm7
         end
       end
       object Panel5: TPanel
-        Left = 100
-        Top = 435
-        Width = 129
-        Height = 78
+        Left = 136
+        Top = 472
+        Width = 114
+        Height = 65
         BevelOuter = bvNone
         Color = clWhite
         ParentBackground = False
@@ -311,8 +319,8 @@ object Form7: TForm7
           AlignWithMargins = True
           Left = 10
           Top = 10
-          Width = 109
-          Height = 58
+          Width = 94
+          Height = 45
           Margins.Left = 10
           Margins.Top = 10
           Margins.Right = 10
@@ -329,8 +337,8 @@ object Form7: TForm7
         object Label11: TLabel
           Left = 0
           Top = 0
-          Width = 129
-          Height = 78
+          Width = 114
+          Height = 65
           Align = alClient
           Alignment = taCenter
           Caption = 'Quitter'
@@ -342,15 +350,15 @@ object Form7: TForm7
           ParentFont = False
           Layout = tlCenter
           OnClick = Label11Click
-          ExplicitWidth = 82
-          ExplicitHeight = 33
+          ExplicitWidth = 129
+          ExplicitHeight = 81
         end
         object ComboBox1: TComboBox
           AlignWithMargins = True
           Left = 150
           Top = 75
           Width = 0
-          Height = 23
+          Height = 0
           Margins.Left = 150
           Margins.Top = 75
           Margins.Right = 79
@@ -366,6 +374,7 @@ object Form7: TForm7
             'En cours'
             'Termin'#233
             'En attente')
+          ExplicitHeight = 23
         end
       end
       object ComboBoxStatut: TComboBox
@@ -408,13 +417,12 @@ object Form7: TForm7
           'En cours'
           'Termin'#233
           'En attente')
-        ExplicitWidth = 573
       end
       object Panel6: TPanel
-        Left = 350
-        Top = 435
-        Width = 200
-        Height = 78
+        Left = 304
+        Top = 472
+        Width = 217
+        Height = 65
         BevelOuter = bvNone
         Color = clWhite
         ParentBackground = False
@@ -423,8 +431,8 @@ object Form7: TForm7
           AlignWithMargins = True
           Left = 10
           Top = 10
-          Width = 180
-          Height = 58
+          Width = 197
+          Height = 45
           Margins.Left = 10
           Margins.Top = 10
           Margins.Right = 10
@@ -441,8 +449,8 @@ object Form7: TForm7
         object Label12: TLabel
           Left = 0
           Top = 0
-          Width = 200
-          Height = 78
+          Width = 217
+          Height = 65
           Align = alClient
           Alignment = taCenter
           Caption = 'Supprimer'
@@ -462,7 +470,7 @@ object Form7: TForm7
           Left = 150
           Top = 75
           Width = 0
-          Height = 23
+          Height = 0
           Margins.Left = 150
           Margins.Top = 75
           Margins.Right = 79
@@ -478,7 +486,26 @@ object Form7: TForm7
             'En cours'
             'Termin'#233
             'En attente')
+          ExplicitHeight = 23
         end
+      end
+      object ComboBox4: TComboBox
+        Left = 287
+        Top = 433
+        Width = 434
+        Height = 22
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Roboto'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 11
+        OnChange = ComboBox4Change
+        Items.Strings = (
+          'En cours'
+          'Termin'#233
+          'En attente')
       end
     end
   end

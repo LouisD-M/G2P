@@ -313,6 +313,41 @@ object Form2: TForm2
         ExplicitHeight = 48
       end
     end
+    object Panel11: TPanel
+      Left = 0
+      Top = 350
+      Width = 385
+      Height = 41
+      BevelOuter = bvNone
+      Color = 5254402
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clHighlight
+      Font.Height = -40
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 8
+      object Label13: TLabel
+        Left = 0
+        Top = 0
+        Width = 385
+        Height = 41
+        Align = alClient
+        Alignment = taCenter
+        Caption = 'STATS'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -40
+        Font.Name = 'Roboto'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Layout = tlCenter
+        OnClick = Label5Click
+        ExplicitWidth = 121
+        ExplicitHeight = 48
+      end
+    end
   end
   object Panel2: TPanel
     Left = 385

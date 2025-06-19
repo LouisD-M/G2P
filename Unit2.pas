@@ -34,6 +34,8 @@ type
     Label12: TLabel;
     Panel8: TPanel;
     Label5: TLabel;
+    Panel11: TPanel;
+    Label13: TLabel;
 
     // Événement : lorsqu'on clique sur un label (ex: bouton de test)
     procedure Label11Click(Sender: TObject);
