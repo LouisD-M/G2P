@@ -650,7 +650,13 @@ object Form2: TForm2
     Params.Strings = (
       'Database=N:\G2P\projet.sbd'
       'DriverID=SQLite')
+    Connected = True
     Left = 40
     Top = 104
+  end
+  object FDQuery1: TFDQuery
+    Connection = FDConnection1
+    Left = 200
+    Top = 112
   end
 end

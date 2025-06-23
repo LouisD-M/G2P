@@ -36,6 +36,7 @@ type
     Label5: TLabel;
     Panel11: TPanel;
     Label13: TLabel;
+    FDQuery1: TFDQuery;
 
     // Événement : lorsqu'on clique sur un label (ex: bouton de test)
     procedure Label11Click(Sender: TObject);

@@ -24,9 +24,30 @@ type
     Panel3: TPanel;
     Shape3: TShape;
     Label4: TLabel;
+    Panel4: TPanel;
+    Shape5: TShape;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Panel6: TPanel;
+    Shape6: TShape;
+    Label8: TLabel;
+    Panel7: TPanel;
+    Shape7: TShape;
+    Label9: TLabel;
+    Label10: TLabel;
+    Panel8: TPanel;
+    Shape10: TShape;
+    Label13: TLabel;
+    Shape8: TShape;
+    Shape9: TShape;
+    Label12: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
     procedure Label11Click(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+
   private
     procedure RemplirComboBoxProjets;
     procedure AfficherProjetPrincipal(const titreProjet: string);
@@ -34,6 +55,10 @@ type
     procedure AfficherProjetsLies(const titreProjet: string);
     procedure AfficherHierarchieProjet(const titreProjet: string);
     procedure MettreAJourBarreAvancement;
+    procedure MettreAJourStatsEnAttenteGlobale;
+    procedure MettreAJourStatsTerminesGlobale;
+    procedure MettreAJourStatsEnCoursGlobale;
+    procedure MettreAJourBarreGlobaleStatut;
   public
   end;
 
@@ -80,6 +105,9 @@ begin
     AfficherProjetsLies(titreProjet);
     AfficherHierarchieProjet(titreProjet);
     MettreAJourBarreAvancement;
+    MettreAJourStatsTerminesGlobale;
+    MettreAJourStatsEnCoursGlobale;
+    MettreAJourBarreGlobaleStatut;
   end
   else
   begin
@@ -223,6 +251,7 @@ end;
 procedure TForm8.FormCreate(Sender: TObject);
 begin
   RemplirComboBoxProjets;
+  MettreAJourStatsEnAttenteGlobale;
   if ComboBox1.Items.Count > 0 then
   begin
     ComboBox1.ItemIndex := 0;
@@ -234,6 +263,8 @@ procedure TForm8.Label11Click(Sender: TObject);
 begin
   Self.Close;
 end;
+
+
 
 procedure TForm8.MettreAJourBarreAvancement;
 var
@@ -306,5 +337,178 @@ begin
     Qry.Free;
   end;
 end;
+
+procedure TForm8.MettreAJourStatsEnAttenteGlobale;
+var
+  Qry: TFDQuery;
+  total, enAttente, pourcentage: Integer;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := Form2.FDConnection1;
+
+    // Total de projets
+    Qry.SQL.Text := 'SELECT COUNT(*) FROM projet';
+    Qry.Open;
+    total := Qry.Fields[0].AsInteger;
+
+    // Total de projets en attente
+    Qry.Close;
+    Qry.SQL.Text := 'SELECT COUNT(*) FROM projet WHERE LOWER(TRIM(statut)) = ''en attente''';
+    Qry.Open;
+    enAttente := Qry.Fields[0].AsInteger;
+
+    // Calcul du pourcentage
+    if total > 0 then
+      pourcentage := Round((enAttente / total) * 100)
+    else
+      pourcentage := 0;
+
+    // Mise à jour visuelle (exemple avec Shape5 et Label6)
+    Shape5.Width := Round((Panel4.Width * pourcentage) / 100);
+    Label5.Caption := IntToStr(pourcentage) + ' % des projets en attente  ';
+
+  finally
+    Qry.Free;
+  end;
+end;
+
+procedure TForm8.MettreAJourStatsTerminesGlobale;
+var
+  Qry: TFDQuery;
+  total, Termines, pourcentage: Integer;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := Form2.FDConnection1;
+
+    // Total de projets
+    Qry.SQL.Text := 'SELECT COUNT(*) FROM projet';
+    Qry.Open;
+    total := Qry.Fields[0].AsInteger;
+
+    // Total de projets en attente
+    Qry.Close;
+    Qry.SQL.Text := 'SELECT COUNT(*) FROM projet WHERE statut = ''Terminé''';
+    Qry.Open;
+    Termines := Qry.Fields[0].AsInteger;
+
+    // Calcul du pourcentage
+    if total > 0 then
+      pourcentage := Round((Termines / total) * 100)
+    else
+      pourcentage := 0;
+
+    // Mise à jour visuelle (exemple avec Shape5 et Label6)
+    Shape6.Width := Round((Panel6.Width * pourcentage) / 100);
+    Label8.Caption := IntToStr(pourcentage) + ' % des projets en attente  ';
+
+  finally
+    Qry.Free;
+  end;
+end;
+
+
+procedure TForm8.MettreAJourStatsEnCoursGlobale;
+var
+  Qry: TFDQuery;
+  total, Termines, pourcentage: Integer;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := Form2.FDConnection1;
+
+    // Total de projets
+    Qry.SQL.Text := 'SELECT COUNT(*) FROM projet';
+    Qry.Open;
+    total := Qry.Fields[0].AsInteger;
+
+    // Total de projets en attente
+    Qry.Close;
+    Qry.SQL.Text := 'SELECT COUNT(*) FROM projet WHERE statut = ''En cours''';
+    Qry.Open;
+    Termines := Qry.Fields[0].AsInteger;
+
+    // Calcul du pourcentage
+    if total > 0 then
+      pourcentage := Round((Termines / total) * 100)
+    else
+      pourcentage := 0;
+
+    // Mise à jour visuelle (exemple avec Shape5 et Label6)
+    Shape7.Width := Round((Panel7.Width * pourcentage) / 100);
+    Label10.Caption := IntToStr(pourcentage) + ' % des projets en attente  ';
+
+  finally
+    Qry.Free;
+  end;
+end;
+
+
+
+procedure TForm8.MettreAJourBarreGlobaleStatut;
+var
+  Qry: TFDQuery;
+  nbAttente, nbCours, nbTermines, nbTotal: Integer;
+  wAttente, wCours, wTermines: Integer;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := Form2.FDConnection1;
+
+    // 1. Nombre de projets "En attente"
+    Qry.SQL.Text := 'SELECT COUNT(*) FROM projet WHERE LOWER(TRIM(statut)) = ''en attente''';
+    Qry.Open;
+    nbAttente := Qry.Fields[0].AsInteger;
+
+    // 2. Nombre de projets "En cours"
+    Qry.SQL.Text := 'SELECT COUNT(*) FROM projet WHERE statut = ''En cours''';
+    Qry.Open;
+    nbCours := Qry.Fields[0].AsInteger;
+
+    // 3. Nombre de projets "Terminé"
+    Qry.SQL.Text := 'SELECT COUNT(*) FROM projet WHERE statut = ''Terminé''';
+    Qry.Open;
+    nbTermines := Qry.Fields[0].AsInteger;
+
+    // Total
+    nbTotal := nbAttente + nbCours + nbTermines;
+    if nbTotal = 0 then nbTotal := 1;
+
+    // Largeurs (en pixels, selon la largeur du Panel)
+    wAttente := Round((nbAttente / nbTotal) * Panel8.Width);
+    wCours   := Round((nbCours / nbTotal) * Panel8.Width);
+    wTermines:= Panel8.Width - wAttente - wCours;
+
+    // Position et taille des formes
+    Shape8.Width := wAttente;
+    Shape9.Width := wCours;
+    Shape10.Width := wTermines;
+
+    Shape8.Left := 0;
+    Shape9.Left := Shape8.Left + wAttente;
+    Shape10.Left := Shape9.Left + wCours;
+
+    // Shape8 = En attente
+Label12.Caption := 'Attente ';
+Label12.Left := (Shape8.Left + Shape9.left) div 2 - 15;
+//Label12.Top := Shape8.Top + (Shape8.Height - Label12.Height) div 2;
+
+// Shape9 = En cours
+Label14.Caption := 'En cours ';
+Label14.Left := (Shape9.Left + Shape10.left) div 2 - 15;
+//Label14.Top := Shape9.Top + (Shape9.Height - Label14.Height) div 2;
+
+// Shape10 = Terminé
+Label15.Caption := 'Terminé ';
+Label15.Left := Shape10.Left + (Shape10.Width - Label15.Width) div 2;
+//Label15.Top := Shape10.Top + (Shape10.Height - Label15.Height) div 2;
+
+
+  finally
+    Qry.Free;
+  end;
+end;
+
 end.
 
