@@ -1,10 +1,11 @@
-unit Unit8;
+﻿unit Unit8;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, FireDAC.Comp.Client, FireDAC.Stan.Param,
+  System.UITypes, Data.DB; // <- ajouté pour éviter l'avertissement H2443
 
 type
   TForm8 = class(TForm)
@@ -19,11 +20,21 @@ type
     Panel5: TPanel;
     Shape4: TShape;
     Label11: TLabel;
+    LabelProjetSelectionne: TLabel;
+    Panel3: TPanel;
+    Shape3: TShape;
+    Label4: TLabel;
     procedure Label11Click(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
-    { D�clarations priv�es }
+    procedure RemplirComboBoxProjets;
+    procedure AfficherProjetPrincipal(const titreProjet: string);
+    procedure AfficherProjetsLiesRecursive(parentID: Integer; niveau: Integer);
+    procedure AfficherProjetsLies(const titreProjet: string);
+    procedure AfficherHierarchieProjet(const titreProjet: string);
+    procedure MettreAJourBarreAvancement;
   public
-    { D�clarations publiques }
   end;
 
 var
@@ -31,11 +42,269 @@ var
 
 implementation
 
+uses
+  Unit2;
+
 {$R *.dfm}
+
+// Remplit ComboBox1 avec les titres de projets
+procedure TForm8.RemplirComboBoxProjets;
+var
+  Qry: TFDQuery;
+begin
+  ComboBox1.Clear;
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := Form2.FDConnection1;
+    Qry.SQL.Text := 'SELECT titre FROM projet ORDER BY titre';
+    Qry.Open;
+    while not Qry.Eof do
+    begin
+      ComboBox1.Items.Add(Qry.FieldByName('titre').AsString);
+      Qry.Next;
+    end;
+  finally
+    Qry.Free;
+  end;
+end;
+
+procedure TForm8.ComboBox1Change(Sender: TObject);
+var
+  titreProjet: string;
+begin
+  if ComboBox1.ItemIndex >= 0 then
+  begin
+    titreProjet := ComboBox1.Text;
+    LabelProjetSelectionne.Caption := 'Projet selectionné : ' + titreProjet;
+    AfficherProjetPrincipal(titreProjet);
+    AfficherProjetsLies(titreProjet);
+    AfficherHierarchieProjet(titreProjet);
+    MettreAJourBarreAvancement;
+  end
+  else
+  begin
+    LabelProjetSelectionne.Caption := 'Aucun projet sélectionné';
+    Label1.Caption := '';
+    Label2.Caption := '';
+  end;
+end;
+
+procedure TForm8.AfficherProjetPrincipal(const titreProjet: string);
+var
+  Qry: TFDQuery;
+  idParent: integer;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := Form2.FDConnection1;
+    Qry.SQL.Text := 'SELECT lier_a FROM projet WHERE titre = :titre';
+    Qry.ParamByName('titre').AsString := titreProjet;
+    Qry.Open;
+
+    if Qry.IsEmpty or Qry.FieldByName('lier_a').IsNull then
+      Label2.Caption := 'Ce projet est le projet principal'
+   else
+begin
+  // 🟢 Sauvegarde de la valeur AVANT de modifier la requête
+  idParent := Qry.FieldByName('lier_a').AsInteger;
+
+  Qry.Close;
+  Qry.SQL.Text := 'SELECT titre FROM projet WHERE id = :id';
+  Qry.ParamByName('id').AsInteger := idParent;
+  Qry.Open;
+
+      if not Qry.IsEmpty then
+        Label2.Caption := 'Ce projet est lié au projet principal : ' + Qry.FieldByName('titre').AsString
+      else
+        Label2.Caption := 'Projet principal introuvable';
+    end;
+  finally
+    Qry.Free;
+  end;
+end;
+
+procedure TForm8.AfficherProjetsLiesRecursive(parentID: Integer; niveau: Integer);
+var
+  Qry: TFDQuery;
+  indent, titre: string;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := Form2.FDConnection1;
+    Qry.SQL.Text := 'SELECT id, titre FROM projet WHERE lier_a = :id ORDER BY titre';
+    Qry.ParamByName('id').AsInteger := parentID;
+    Qry.Open;
+
+    indent := StringOfChar(' ', niveau * 2);
+
+    while not Qry.Eof do
+    begin
+      titre := Qry.FieldByName('titre').AsString;
+      Label1.Caption := Label1.Caption + indent + '- ' + titre + sLineBreak;
+      AfficherProjetsLiesRecursive(Qry.FieldByName('id').AsInteger, niveau + 1);
+      Qry.Next;
+    end;
+  finally
+    Qry.Free;
+  end;
+end;
+
+procedure TForm8.AfficherProjetsLies(const titreProjet: string);
+var
+  Qry: TFDQuery;
+  idProjet: Integer;
+begin
+  Label1.Caption := '';
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := Form2.FDConnection1;
+    Qry.SQL.Text := 'SELECT id FROM projet WHERE titre = :titre';
+    Qry.ParamByName('titre').AsString := titreProjet;
+    Qry.Open;
+
+    if Qry.IsEmpty then
+    begin
+      Label1.Caption := 'Projet introuvable';
+      Exit;
+    end;
+
+    idProjet := Qry.FieldByName('id').AsInteger;
+    AfficherProjetsLiesRecursive(idProjet, 0);
+
+    if Label1.Caption = '' then
+      Label1.Caption := 'Aucun projet lié';
+  finally
+    Qry.Free;
+  end;
+end;
+
+procedure TForm8.AfficherHierarchieProjet(const titreProjet: string);
+var
+  Qry: TFDQuery;
+  chaine, titreActuel: string;
+  idParent: Integer;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := Form2.FDConnection1;
+    chaine := titreProjet;
+    titreActuel := titreProjet;
+
+    while True do
+    begin
+      Qry.Close;
+      Qry.SQL.Text := 'SELECT lier_a FROM projet WHERE titre = :titre';
+      Qry.ParamByName('titre').AsString := titreActuel;
+      Qry.Open;
+
+      if Qry.IsEmpty or Qry.FieldByName('lier_a').IsNull then
+        Break;
+
+      // Lire et stocker immédiatement l'ID parent avant de changer le SQL
+      idParent := Qry.FieldByName('lier_a').AsInteger;
+
+      Qry.Close;
+      Qry.SQL.Text := 'SELECT titre FROM projet WHERE id = :id';
+      Qry.ParamByName('id').AsInteger := idParent;
+      Qry.Open;
+
+      if Qry.IsEmpty then Break;
+
+      titreActuel := Qry.FieldByName('titre').AsString;
+      chaine := titreActuel + ' > ' + chaine;
+    end;
+
+    Label2.Caption := 'Hiérarchie : ' + chaine;
+  finally
+    Qry.Free;
+  end;
+end;
+
+procedure TForm8.FormCreate(Sender: TObject);
+begin
+  RemplirComboBoxProjets;
+  if ComboBox1.Items.Count > 0 then
+  begin
+    ComboBox1.ItemIndex := 0;
+    ComboBox1Change(nil);
+  end;
+end;
 
 procedure TForm8.Label11Click(Sender: TObject);
 begin
-self.close;
+  Self.Close;
 end;
 
+procedure TForm8.MettreAJourBarreAvancement;
+var
+  lignes: TStringList;
+  i, total, score, pourcentage: Integer;
+  titresConcat: string;
+  Qry: TFDQuery;
+  statut: string;
+begin
+  lignes := TStringList.Create;
+  Qry := TFDQuery.Create(nil);
+  try
+    // Extraire les lignes du Label1 (projets liés)
+    lignes.Text := StringReplace(Label1.Caption, sLineBreak, #13#10, [rfReplaceAll]);
+
+    // Ajouter le projet sélectionné (en tête)
+    lignes.Insert(0, ComboBox1.Text);
+
+    // Nettoyer les lignes pour ne garder que les titres
+    for i := 0 to lignes.Count - 1 do
+      lignes[i] := Trim(StringReplace(lignes[i], '- ', '', []));
+
+    // Construire la clause IN
+    titresConcat := '';
+    for i := 0 to lignes.Count - 1 do
+    begin
+      if i > 0 then
+        titresConcat := titresConcat + ', ';
+      titresConcat := titresConcat + QuotedStr(lignes[i]);
+    end;
+
+    // Préparer la requête SQL
+    Qry.Connection := Form2.FDConnection1;
+    Qry.SQL.Text := 'SELECT statut FROM projet WHERE titre IN (' + titresConcat + ')';
+    Qry.Open;
+
+    // Calculer le score
+    total := 0;
+    score := 0;
+
+    while not Qry.Eof do
+    begin
+      Inc(total);
+      statut := LowerCase(Trim(Qry.FieldByName('statut').AsString));
+
+      if statut = 'en attente' then
+        score := score + 0
+      else if statut = 'en cours' then
+        score := score + 1
+      else if statut = 'terminé' then
+        score := score + 2;
+
+      Qry.Next;
+    end;
+
+    // Calcul du pourcentage
+    if total = 0 then
+      pourcentage := 0
+    else
+      pourcentage := Round((score / (total * 2)) * 100);
+
+    // Appliquer la largeur du Shape3
+    Shape3.Width := Round((pourcentage / 100) * Panel3.Width);
+
+    // Afficher dans Label4
+    Label4.Caption := IntToStr(pourcentage) + ' %';
+
+  finally
+    lignes.Free;
+    Qry.Free;
+  end;
+end;
 end.
+

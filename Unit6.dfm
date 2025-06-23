@@ -302,9 +302,8 @@ object Form6: TForm6
           ParentFont = False
           Layout = tlCenter
           OnClick = Label10Click
-          ExplicitLeft = 48
-          ExplicitWidth = 137
-          ExplicitHeight = 78
+          ExplicitWidth = 84
+          ExplicitHeight = 33
         end
       end
       object Panel5: TPanel

@@ -13,24 +13,24 @@ object Form8: TForm8
   Font.Style = []
   Position = poScreenCenter
   WindowState = wsMaximized
+  OnCreate = FormCreate
   TextHeight = 15
   object Panel1: TPanel
     Left = 0
-    Top = 380
+    Top = 622
     Width = 1920
-    Height = 700
+    Height = 458
     Align = alBottom
     BevelOuter = bvNone
     Color = 13758703
     ParentBackground = False
     TabOrder = 0
-    ExplicitTop = 180
     object Shape2: TShape
       AlignWithMargins = True
       Left = 20
       Top = 5
       Width = 1880
-      Height = 675
+      Height = 433
       Margins.Left = 20
       Margins.Top = 5
       Margins.Right = 20
@@ -45,7 +45,7 @@ object Form8: TForm8
     end
     object Label3: TLabel
       Left = 58
-      Top = 48
+      Top = 24
       Width = 254
       Height = 33
       Caption = 'Statistique avanc'#233's :'
@@ -100,8 +100,46 @@ object Form8: TForm8
         ParentFont = False
         Layout = tlCenter
         OnClick = Label11Click
-        ExplicitWidth = 145
-        ExplicitHeight = 41
+        ExplicitWidth = 82
+        ExplicitHeight = 33
+      end
+    end
+    object Panel3: TPanel
+      Left = 58
+      Top = 63
+      Width = 1000
+      Height = 41
+      BevelOuter = bvNone
+      Color = clSilver
+      ParentBackground = False
+      TabOrder = 1
+      object Shape3: TShape
+        Left = 0
+        Top = 0
+        Width = 65
+        Height = 41
+        Align = alLeft
+        Brush.Color = clMoneyGreen
+        Pen.Style = psClear
+        ExplicitLeft = 24
+        ExplicitTop = 16
+        ExplicitHeight = 65
+      end
+      object Label4: TLabel
+        Left = 384
+        Top = 0
+        Width = 169
+        Height = 48
+        Alignment = taCenter
+        Caption = 'Label4'
+        Color = clBlack
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -40
+        Font.Name = 'Roboto'
+        Font.Style = [fsBold, fsItalic]
+        ParentColor = False
+        ParentFont = False
       end
     end
   end
@@ -109,22 +147,19 @@ object Form8: TForm8
     Left = 0
     Top = 0
     Width = 1920
-    Height = 380
+    Height = 622
     Align = alClient
     BevelOuter = bvNone
     Color = 13758703
     ParentBackground = False
     TabOrder = 1
-    ExplicitLeft = 528
-    ExplicitTop = 208
-    ExplicitWidth = 185
-    ExplicitHeight = 41
+    ExplicitHeight = 380
     object Shape1: TShape
       AlignWithMargins = True
       Left = 20
       Top = 20
       Width = 1880
-      Height = 340
+      Height = 582
       Margins.Left = 20
       Margins.Top = 20
       Margins.Right = 20
@@ -139,7 +174,7 @@ object Form8: TForm8
     end
     object Label1: TLabel
       Left = 58
-      Top = 88
+      Top = 104
       Width = 151
       Height = 33
       Caption = 'Projet Li'#233's : '
@@ -152,10 +187,23 @@ object Form8: TForm8
     end
     object Label2: TLabel
       Left = 602
-      Top = 88
+      Top = 104
       Width = 208
       Height = 33
       Caption = 'Projet Principal : '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -27
+      Font.Name = 'Roboto'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object LabelProjetSelectionne: TLabel
+      Left = 58
+      Top = 65
+      Width = 232
+      Height = 33
+      Caption = 'Projet selectionn'#233' :'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clNavy
       Font.Height = -27
@@ -169,7 +217,7 @@ object Form8: TForm8
       Width = 1799
       Height = 23
       TabOrder = 0
-      Text = 'ComboBox1'
+      OnChange = ComboBox1Change
     end
   end
 end

@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, FireDAC.Comp.Client, Unit2;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, FireDAC.Comp.Client, Unit2, Data.DB;
 
 type
   TForm6 = class(TForm)
@@ -105,10 +105,13 @@ begin
     qry.ParamByName('description').AsString := Edit7.Text;
     qry.ParamByName('commentaires').AsString := Edit8.Text;
 
-    if projetID = 0 then
-      qry.ParamByName('lier_a').Clear
-    else
-      qry.ParamByName('lier_a').AsInteger := projetID;
+ if projetID = 0 then
+begin
+  qry.ParamByName('lier_a').DataType := ftInteger;
+  qry.ParamByName('lier_a').Clear;
+end
+else
+  qry.ParamByName('lier_a').AsInteger := projetID;
 
     qry.ExecSQL;
 

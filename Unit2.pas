@@ -12,7 +12,7 @@ uses
   Unit3, // On importe le design de la "carte" projet (TFrame3)
   FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.Phys.Intf,
   FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat, Unit1, unit5,
-  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.Comp.DataSet;
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.Comp.DataSet, Unit8;
 
 type
   // Déclaration de la fenêtre principale
@@ -50,6 +50,7 @@ type
     procedure Label12Click(Sender: TObject);
     procedure Label6Click(Sender: TObject);
     procedure Label5Click(Sender: TObject);
+    procedure Label13Click(Sender: TObject);
 
 
   private
@@ -251,6 +252,11 @@ begin
   Form6.ShowModal;
   ChargerStatutsProjets;
 
+end;
+
+procedure TForm2.Label13Click(Sender: TObject);
+begin
+Form8.ShowModal;
 end;
 
 procedure TForm2.Label6Click(Sender: TObject);

@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, unit2, FireDAC.Comp.Client, FireDAC.Stan.Param, // <--- ajout important
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, unit2, FireDAC.Comp.Client, FireDAC.Stan.Param,Data.DB, // <--- ajout important
   System.UITypes;
 
 type
@@ -95,10 +95,12 @@ begin
   ComboBox4.ItemIndex := 0;
 end;
 
+
 procedure TForm7.FormCreate(Sender: TObject);
 var
   Qry: TFDQuery;
 begin
+  // Chargement des projets dans ComboBox2 (projet à modifier)
   ComboBox2.Clear;
 
   Qry := TFDQuery.Create(nil);
@@ -116,6 +118,31 @@ begin
   finally
     Qry.Free;
   end;
+
+  // Chargement des projets disponibles à lier dans ComboBox4
+  ComboBox4.Clear;
+  ComboBox4.Items.Add('Aucun projet');
+
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := Form2.FDConnection1;
+    Qry.SQL.Text := 'SELECT titre FROM projet ORDER BY titre';
+    Qry.Open;
+
+    while not Qry.Eof do
+    begin
+      ComboBox4.Items.Add(Qry.FieldByName('titre').AsString);
+      Qry.Next;
+    end;
+
+  finally
+    Qry.Free;
+  end;
+
+  ComboBox4.ItemIndex := 0; // par défaut "Aucun projet"
+
+  // Lancer la logique liée au ComboBox4 si besoin
+  ComboBox4Change(nil);
 end;
 
 procedure TForm7.Label10Click(Sender: TObject);
@@ -139,8 +166,8 @@ begin
       'priorite = :priorite, ' +
       'cout_reel = :cout_reel, ' +
       'description = :description, ' +
-      'commentaires = :commentaires, ' +
-      'lier_a = :lier_a ' +
+      'commentaires = :commentaires ' +
+     // 'lier_a = :lier_a ' +
       'WHERE titre = :titre';
 
     Qry.ParamByName('responsable').AsString := Edit2.Text;
@@ -151,12 +178,6 @@ begin
     Qry.ParamByName('description').AsString := Edit7.Text;
     Qry.ParamByName('commentaires').AsString := Edit8.Text;
     Qry.ParamByName('titre').AsString := ComboBox2.Text;
-
-    // ✅ Gestion du champ "lier_a"
-    if ComboBox4.ItemIndex > 0 then
-      Qry.ParamByName('lier_a').AsInteger := Integer(ComboBox4.Items.Objects[ComboBox4.ItemIndex])
-    else
-      Qry.ParamByName('lier_a').Clear; // Aucun projet sélectionné
 
     Qry.ExecSQL;
 

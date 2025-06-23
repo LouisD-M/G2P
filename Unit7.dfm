@@ -215,6 +215,7 @@ object Form7: TForm7
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
+        Visible = False
       end
       object Edit2: TEdit
         Left = 287
@@ -350,15 +351,15 @@ object Form7: TForm7
           ParentFont = False
           Layout = tlCenter
           OnClick = Label11Click
-          ExplicitWidth = 129
-          ExplicitHeight = 81
+          ExplicitWidth = 82
+          ExplicitHeight = 33
         end
         object ComboBox1: TComboBox
           AlignWithMargins = True
           Left = 150
           Top = 75
           Width = 0
-          Height = 0
+          Height = 23
           Margins.Left = 150
           Margins.Top = 75
           Margins.Right = 79
@@ -374,7 +375,6 @@ object Form7: TForm7
             'En cours'
             'Termin'#233
             'En attente')
-          ExplicitHeight = 23
         end
       end
       object ComboBoxStatut: TComboBox
@@ -470,7 +470,7 @@ object Form7: TForm7
           Left = 150
           Top = 75
           Width = 0
-          Height = 0
+          Height = 23
           Margins.Left = 150
           Margins.Top = 75
           Margins.Right = 79
@@ -486,7 +486,6 @@ object Form7: TForm7
             'En cours'
             'Termin'#233
             'En attente')
-          ExplicitHeight = 23
         end
       end
       object ComboBox4: TComboBox
@@ -501,11 +500,8 @@ object Form7: TForm7
         Font.Style = []
         ParentFont = False
         TabOrder = 11
+        Visible = False
         OnChange = ComboBox4Change
-        Items.Strings = (
-          'En cours'
-          'Termin'#233
-          'En attente')
       end
     end
   end

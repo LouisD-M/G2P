@@ -343,7 +343,7 @@ object Form2: TForm2
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
-        OnClick = Label5Click
+        OnClick = Label13Click
         ExplicitWidth = 121
         ExplicitHeight = 48
       end
