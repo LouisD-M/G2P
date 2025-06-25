@@ -12,7 +12,6 @@ type
     Image1: TImage;
     LabelTitre: TLabel;
     LabelResponsable: TLabel;
-    LabelDate: TLabel;
     LabelStatut: TLabel;
     LabelPriorite: TLabel;
     LabelCout_Reel: TLabel;
@@ -22,11 +21,15 @@ type
     PrintDialog1: TPrintDialog;
     Panel1: TPanel;
     Panel2: TPanel;
-    Shape1: TShape;
+    LabelDate: TLabel;
+    Image2: TImage;
+    Image3: TImage;
+    Image4: TImage;
+    Image5: TImage;
     Shape2: TShape;
     Shape3: TShape;
-    Shape4: TShape;
     procedure BtnImprimerClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Déclarations privées }
   public
@@ -53,4 +56,11 @@ begin
     end;
   end;
 end;
+procedure TForm5.FormCreate(Sender: TObject);
+begin
+Shape2.SendToBack;
+Shape3.SendToBack;
+
+end;
+
 end.

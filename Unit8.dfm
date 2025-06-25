@@ -25,14 +25,12 @@ object Form8: TForm8
     Color = 13758703
     ParentBackground = False
     TabOrder = 0
-    ExplicitTop = 622
-    ExplicitHeight = 458
     object Shape2: TShape
       AlignWithMargins = True
       Left = 20
       Top = 5
       Width = 1880
-      Height = 583
+      Height = 630
       Margins.Left = 20
       Margins.Top = 5
       Margins.Right = 20
@@ -42,7 +40,6 @@ object Form8: TForm8
       Shape = stRoundRect
       ExplicitLeft = -92
       ExplicitTop = 8
-      ExplicitHeight = 630
     end
     object Label3: TLabel
       Left = 58
@@ -86,7 +83,7 @@ object Form8: TForm8
     object Label8: TLabel
       Left = 300
       Top = 129
-      Width = 413
+      Width = 81
       Height = 33
       Alignment = taCenter
       Caption = 'Label5'
@@ -102,7 +99,7 @@ object Form8: TForm8
     object Label5: TLabel
       Left = 300
       Top = 73
-      Width = 381
+      Width = 81
       Height = 33
       Alignment = taCenter
       Caption = 'Label5'
@@ -131,7 +128,7 @@ object Form8: TForm8
     object Label10: TLabel
       Left = 300
       Top = 194
-      Width = 353
+      Width = 81
       Height = 33
       Alignment = taCenter
       Caption = 'Label5'
@@ -160,7 +157,7 @@ object Form8: TForm8
     object Label12: TLabel
       Left = 170
       Top = 309
-      Width = 159
+      Width = 81
       Height = 33
       Alignment = taCenter
       Caption = 'Label5'
@@ -176,7 +173,7 @@ object Form8: TForm8
     object Label14: TLabel
       Left = 442
       Top = 309
-      Width = 167
+      Width = 81
       Height = 33
       Alignment = taCenter
       Caption = 'Label5'
@@ -192,7 +189,7 @@ object Form8: TForm8
     object Label15: TLabel
       Left = 632
       Top = 309
-      Width = 417
+      Width = 81
       Height = 33
       Alignment = taCenter
       Caption = 'Label5'
@@ -206,11 +203,10 @@ object Form8: TForm8
       ParentFont = False
     end
     object Panel5: TPanel
-      Left = 0
-      Top = 608
-      Width = 1920
+      Left = 100
+      Top = 580
+      Width = 300
       Height = 47
-      Align = alBottom
       BevelOuter = bvNone
       Color = clWhite
       ParentBackground = False
@@ -219,14 +215,14 @@ object Form8: TForm8
         AlignWithMargins = True
         Left = 10
         Top = 10
-        Width = 1900
+        Width = 280
         Height = 27
         Margins.Left = 10
         Margins.Top = 10
         Margins.Right = 10
         Margins.Bottom = 10
         Align = alClient
-        Brush.Color = clRed
+        Brush.Color = clGreen
         Pen.Style = psClear
         Shape = stRoundRect
         ExplicitLeft = 74
@@ -237,11 +233,11 @@ object Form8: TForm8
       object Label11: TLabel
         Left = 0
         Top = 0
-        Width = 1920
+        Width = 300
         Height = 47
         Align = alClient
         Alignment = taCenter
-        Caption = 'Quitter'
+        Caption = 'Sauvegarder en PDF'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
         Font.Height = -27
@@ -250,10 +246,8 @@ object Form8: TForm8
         ParentFont = False
         Layout = tlCenter
         OnClick = Label11Click
-        ExplicitLeft = 56
-        ExplicitTop = -88
-        ExplicitWidth = 185
-        ExplicitHeight = 113
+        ExplicitWidth = 245
+        ExplicitHeight = 33
       end
     end
     object Panel4: TPanel
@@ -370,6 +364,54 @@ object Form8: TForm8
         ExplicitHeight = 65
       end
     end
+    object Panel9: TPanel
+      Left = 400
+      Top = 580
+      Width = 180
+      Height = 47
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 5
+      object Shape11: TShape
+        AlignWithMargins = True
+        Left = 10
+        Top = 10
+        Width = 160
+        Height = 27
+        Margins.Left = 10
+        Margins.Top = 10
+        Margins.Right = 10
+        Margins.Bottom = 10
+        Align = alClient
+        Brush.Color = clRed
+        Pen.Style = psClear
+        Shape = stRoundRect
+        ExplicitLeft = 74
+        ExplicitTop = 18
+        ExplicitWidth = 142
+        ExplicitHeight = 50
+      end
+      object Label16: TLabel
+        Left = 0
+        Top = 0
+        Width = 180
+        Height = 47
+        Align = alClient
+        Alignment = taCenter
+        Caption = 'Quitter'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -27
+        Font.Name = 'Roboto'
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+        OnClick = Label16Click
+        ExplicitLeft = -280
+        ExplicitTop = -136
+      end
+    end
   end
   object Panel2: TPanel
     Left = 0
@@ -470,7 +512,7 @@ object Form8: TForm8
       object Label4: TLabel
         Left = 648
         Top = -7
-        Width = 617
+        Width = 121
         Height = 48
         Alignment = taCenter
         Caption = 'Label4'

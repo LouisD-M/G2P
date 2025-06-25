@@ -651,6 +651,7 @@ object Form2: TForm2
       'Database=N:\G2P\projet.sbd'
       'DriverID=SQLite')
     Connected = True
+    LoginPrompt = False
     Left = 40
     Top = 104
   end

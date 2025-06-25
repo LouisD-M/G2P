@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, FireDAC.Comp.Client, FireDAC.Stan.Param,
-  System.UITypes, Data.DB; // <- ajouté pour éviter l'avertissement H2443
+  System.UITypes, ShellAPI, Data.DB, Vcl.Printers; // <- ajouté pour éviter l'avertissement H2443
 
 type
   TForm8 = class(TForm)
@@ -44,9 +44,14 @@ type
     Label12: TLabel;
     Label14: TLabel;
     Label15: TLabel;
-    procedure Label11Click(Sender: TObject);
+    Panel9: TPanel;
+    Shape11: TShape;
+    Label16: TLabel;
+    procedure Impr(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure Label11Click(Sender: TObject);
+    procedure Label16Click(Sender: TObject);
 
   private
     procedure RemplirComboBoxProjets;
@@ -59,6 +64,7 @@ type
     procedure MettreAJourStatsTerminesGlobale;
     procedure MettreAJourStatsEnCoursGlobale;
     procedure MettreAJourBarreGlobaleStatut;
+    procedure ImprimerFormulaire;
   public
   end;
 
@@ -259,9 +265,9 @@ begin
   end;
 end;
 
-procedure TForm8.Label11Click(Sender: TObject);
+procedure TForm8.Impr(Sender: TObject);
 begin
-  Self.Close;
+  self.Close;
 end;
 
 
@@ -366,7 +372,7 @@ begin
 
     // Mise à jour visuelle (exemple avec Shape5 et Label6)
     Shape5.Width := Round((Panel4.Width * pourcentage) / 100);
-    Label5.Caption := IntToStr(pourcentage) + ' % des projets en attente  ';
+    Label5.Caption := IntToStr(pourcentage) + ' % des projets avec le statut en cours  ';
 
   finally
     Qry.Free;
@@ -401,7 +407,7 @@ begin
 
     // Mise à jour visuelle (exemple avec Shape5 et Label6)
     Shape6.Width := Round((Panel6.Width * pourcentage) / 100);
-    Label8.Caption := IntToStr(pourcentage) + ' % des projets en attente  ';
+    Label8.Caption := IntToStr(pourcentage) + ' % des projets avec le statut terminé  ';
 
   finally
     Qry.Free;
@@ -437,7 +443,7 @@ begin
 
     // Mise à jour visuelle (exemple avec Shape5 et Label6)
     Shape7.Width := Round((Panel7.Width * pourcentage) / 100);
-    Label10.Caption := IntToStr(pourcentage) + ' % des projets en attente  ';
+    Label10.Caption := IntToStr(pourcentage) + ' % des projets avec le statut en cours  ';
 
   finally
     Qry.Free;
@@ -508,6 +514,74 @@ Label15.Left := Shape10.Left + (Shape10.Width - Label15.Width) div 2;
   finally
     Qry.Free;
   end;
+end;
+
+
+
+procedure TForm8.ImprimerFormulaire;    //Modification en save vers un pdf horizontal
+var
+  bmp: TBitmap;
+  SaveDialog: TSaveDialog;
+  PDFPath: string;
+  R: TRect;
+begin
+  SaveDialog := TSaveDialog.Create(nil);
+  try
+    SaveDialog.Filter := 'Fichier PDF|*.pdf';
+    SaveDialog.DefaultExt := 'pdf';
+    SaveDialog.FileName := 'Export_Projet_G2P.pdf';
+
+    if SaveDialog.Execute then
+    begin
+      PDFPath := SaveDialog.FileName;
+
+      // Sélectionner "Microsoft Print to PDF"
+      Printer.PrinterIndex := Printer.Printers.IndexOf('Microsoft Print to PDF');
+      if Printer.PrinterIndex = -1 then
+      begin
+        ShowMessage('"Microsoft Print to PDF" est introuvable.');
+        Exit;
+      end;
+
+      // Mode paysage
+      Printer.Orientation := poLandscape;
+
+      // Démarre l’impression
+      Printer.Title := PDFPath;
+      Printer.BeginDoc;
+      try
+        bmp := TBitmap.Create;
+        try
+          bmp.Width := Self.ClientWidth;
+          bmp.Height := Self.ClientHeight;
+          Self.PaintTo(bmp.Canvas.Handle, 0, 0);
+
+          // Ajuste le dessin à la page entière
+          R := Rect(0, 0, Printer.PageWidth, Printer.PageHeight);
+          Printer.Canvas.StretchDraw(R, bmp);
+
+        finally
+          bmp.Free;
+        end;
+      finally
+        Printer.EndDoc;
+      end;
+
+      // Ouvre le PDF généré
+      ShellExecute(0, 'open', PChar(PDFPath), nil, nil, SW_SHOWNORMAL);
+    end;
+  finally
+    SaveDialog.Free;
+  end;
+end;
+procedure TForm8.Label11Click(Sender: TObject);
+begin
+ImprimerFormulaire;
+end;
+
+procedure TForm8.Label16Click(Sender: TObject);
+begin
+self.close;
 end;
 
 end.
