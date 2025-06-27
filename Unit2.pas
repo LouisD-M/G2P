@@ -87,60 +87,82 @@ procedure TForm2.ChargerTousLesProjets;
 var
   Qry: TFDQuery;
   ProjetCard: TFrame3;
-  Y: Integer; // Position verticale
+  Y: Integer;
+  responsable, dateDebut, dateFin, statut: string;
 begin
-  // On efface tout ce qui est affiché dans PanelProjets
-  PanelProjets.DestroyComponents;
+  // Bloque les redessins de la ScrollBox
+  LockWindowUpdate(PanelProjets.Handle);
 
-  // Position de départ pour la première carte
-  Y := 10;
-
-  // Création de la requête pour lire la base de données
-  Qry := TFDQuery.Create(nil);
   try
-    Qry.Connection := FDConnection1; // On connecte la requête à la base
-    Qry.SQL.Text := 'SELECT * FROM projet'; // On demande tous les projets
-    Qry.Open;
+    PanelProjets.Visible := False;
+    PanelProjets.DestroyComponents;
+    Y := 10;
 
-    // On parcourt tous les résultats de la base
-    while not Qry.Eof do
-    begin
-      // Création de la carte projet
-      ProjetCard := TFrame3.Create(Self);
-      ProjetCard.Name := ''; // Évite les erreurs de noms en double
-      ProjetCard.Parent := PanelProjets;
+    Qry := TFDQuery.Create(nil);
+    try
+      Qry.Connection := FDConnection1;
+      Qry.SQL.Text := 'SELECT * FROM projet';
+      Qry.Open;
 
-      // Position et taille de la carte
-      ProjetCard.Top := Y;
-      ProjetCard.Left := 10;
-      ProjetCard.Width := PanelProjets.ClientWidth - 20;
-      ProjetCard.Height := 80;
+      while not Qry.Eof do
+      begin
+        // Création de la carte projet (hors écran, pas encore parentée)
+        ProjetCard := TFrame3.Create(nil);
+        ProjetCard.Name := '';
 
-      // Mise à jour de la position pour la carte suivante
-      Y := Y + ProjetCard.Height + 10;
+        // Récupération et sécurisation des données
+        responsable := Qry.FieldByName('responsable').AsString;
+        if Trim(responsable) = '' then responsable := 'Non spécifié';
 
-      // Remplissage des infos à partir des champs de la base
-      ProjetCard.Label1.Caption := Qry.FieldByName('titre').AsString;
-      ProjetCard.Label2.Caption := 'Responsable : ' + Qry.FieldByName('responsable').AsString;
-      ProjetCard.Label3.Caption := Format('%s → %s', [
-        Qry.FieldByName('date_debut').AsString,
-        Qry.FieldByName('date_fin').AsString
-      ]);
-      ProjetCard.Label4.Caption := Qry.FieldByName('statut').AsString;
+        dateDebut := Qry.FieldByName('date_debut').AsString;
+        if Trim(dateDebut) = '' then dateDebut := '??';
 
-      if Qry.FieldByName('statut').AsString = 'En cours' then
+        dateFin := Qry.FieldByName('date_fin').AsString;
+        if Trim(dateFin) = '' then dateFin := '??';
+
+        statut := Qry.FieldByName('statut').AsString;
+        if Trim(statut) = '' then statut := 'Non défini';
+
+        // Remplissage complet
+        ProjetCard.Label1.Caption := Qry.FieldByName('titre').AsString;
+        ProjetCard.Label2.Caption := 'Responsable : ' + responsable;
+        ProjetCard.Label3.Caption := Format('%s → %s', [dateDebut, dateFin]);
+        ProjetCard.Label4.Caption := statut;
+
+        if statut = 'En cours' then
           ProjetCard.Panel1.Color := $00502D02
-        else if Qry.FieldByName('statut').AsString = 'Terminé' then
+        else if statut = 'Terminé' then
           ProjetCard.Panel1.Color := $00FFA90A
-        else if Qry.FieldByName('statut').AsString = 'En attente' then
-          ProjetCard.Panel1.Color := $004E5C60;
+        else if statut = 'En attente' then
+          ProjetCard.Panel1.Color := $004E5C60
+        else
+          ProjetCard.Panel1.Color := clGray;
 
+        // Dimensions (avant affichage)
+        ProjetCard.Top := Y;
+        ProjetCard.Left := 10;
+        ProjetCard.Width := PanelProjets.ClientWidth - 20;
+        ProjetCard.Height := 80;
+        ProjetCard.Constraints.MinWidth := 500;
 
+        // Maintenant seulement : affichage dans la ScrollBox
+        ProjetCard.Parent := PanelProjets;
 
-      Qry.Next; // Passe au projet suivant
+        // Incrément de la position verticale
+        Y := Y + ProjetCard.Height + 10;
+
+        Qry.Next;
+      end;
+
+    finally
+      Qry.Free;
     end;
+
   finally
-    Qry.Free; // Libération mémoire
+    LockWindowUpdate(0); // Réactivation des redessins
+    PanelProjets.Visible := True;
+    PanelProjets.Realign;
+    PanelProjets.Invalidate;
   end;
 end;
 
@@ -295,6 +317,9 @@ begin
       ProjetCard.Width := PanelProjets.ClientWidth - 20;
       ProjetCard.Height := 80;
       Y := Y + ProjetCard.Height + 10;
+     
+     
+
 
      ProjetCard.Label1.Caption := Qry.FieldByName('titre').AsString;
       ProjetCard.Label2.Caption := 'Responsable : ' + Qry.FieldByName('responsable').AsString;
@@ -545,7 +570,7 @@ begin
       // Création dynamique d'une "carte" projet
       ProjetCard := TFrame3.Create(Self);
       ProjetCard.Name := ''; // éviter les erreurs de nom en double
-      ProjetCard.Parent := PanelProjets;
+
 
       ProjetCard.Top := Y;
       ProjetCard.Left := 10;
@@ -570,6 +595,8 @@ begin
           ProjetCard.Panel1.Color := $00FFA90A
         else if Qry.FieldByName('statut').AsString = 'En attente' then
           ProjetCard.Panel1.Color := $004E5C60;
+
+          ProjetCard.Parent := PanelProjets;
 
       Qry.Next;
 

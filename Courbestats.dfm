@@ -1,7 +1,7 @@
-object Form1: TForm1
+object FormCourbeStats: TFormCourbeStats
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'FormCourbeStats'
   ClientHeight = 216
   ClientWidth = 223
   Color = clBtnFace
@@ -25,13 +25,5 @@ object Form1: TForm1
     Width = 34
     Height = 15
     Caption = 'Label1'
-  end
-  object TrackBar1: TTrackBar
-    Left = 8
-    Top = 144
-    Width = 185
-    Height = 45
-    TabOrder = 0
-    OnChange = TrackBar1Change
   end
 end

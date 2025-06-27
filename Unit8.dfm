@@ -408,8 +408,8 @@ object Form8: TForm8
         ParentFont = False
         Layout = tlCenter
         OnClick = Label16Click
-        ExplicitLeft = -280
-        ExplicitTop = -136
+        ExplicitWidth = 82
+        ExplicitHeight = 33
       end
     end
   end
@@ -524,6 +524,47 @@ object Form8: TForm8
         Font.Style = [fsBold, fsItalic]
         ParentColor = False
         ParentFont = False
+      end
+    end
+    object Panel10: TPanel
+      Left = 595
+      Top = 190
+      Width = 212
+      Height = 212
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 2
+      object PaintBox1: TPaintBox
+        Left = 0
+        Top = 0
+        Width = 212
+        Height = 212
+        Align = alClient
+        Color = clSilver
+        ParentColor = False
+        OnPaint = PaintBox1Paint
+        ExplicitLeft = 160
+        ExplicitTop = 64
+        ExplicitWidth = 105
+        ExplicitHeight = 105
+      end
+      object Label17: TLabel
+        Left = 0
+        Top = 0
+        Width = 212
+        Height = 212
+        Align = alClient
+        Alignment = taCenter
+        Caption = 'Label17'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -27
+        Font.Name = 'Roboto'
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+        ExplicitTop = 20
       end
     end
   end

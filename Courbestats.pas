@@ -8,42 +8,34 @@ uses
   Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.StdCtrls, Math;
 
 type
-  TForm1 = class(TForm)
+  TFormCourbeStats = class(TForm)
     PaintBox1: TPaintBox;
-    TrackBar1: TTrackBar;
     Label1: TLabel;
     procedure FormCreate(Sender: TObject);
-    procedure TrackBar1Change(Sender: TObject);
+
     procedure PaintBox1Paint(Sender: TObject);
   private
     FPourcentage: Integer;
   public
+  procedure MettreAJourPourcentage(valeur: Integer);
+  procedure AfficherPourcentage(val: Integer);
   end;
 
 var
-  Form1: TForm1;
+  FormCourbeStats: TFormCourbeStats;
 
 implementation
 
 {$R *.dfm}
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TFormCourbeStats.FormCreate(Sender: TObject);
 begin
-  FPourcentage := 0;
-  TrackBar1.Min := 0;
-  TrackBar1.Max := 100;
-  TrackBar1.Position := 0;
+ // FPourcentage := 0;
+
   Label1.Caption := 'Remplissage : 0 %';
 end;
 
-procedure TForm1.TrackBar1Change(Sender: TObject);
-begin
-  FPourcentage := TrackBar1.Position;
-  Label1.Caption := 'Remplissage : ' + IntToStr(FPourcentage) + ' %';
-  PaintBox1.Invalidate;
-end;
-
-procedure TForm1.PaintBox1Paint(Sender: TObject);
+procedure TFormCourbeStats.PaintBox1Paint(Sender: TObject);
 var
   R: TRect;
   Center: TPoint;
@@ -103,6 +95,20 @@ begin
     Center.X - InnerRadius, Center.Y - InnerRadius,
     Center.X + InnerRadius, Center.Y + InnerRadius
   );
+end;
+
+
+procedure TFormCourbeStats.MettreAJourPourcentage(valeur: Integer);
+begin
+  FPourcentage := EnsureRange(valeur, 0, 100);
+  PaintBox1.Invalidate;
+end;
+
+
+procedure TFormCourbeStats.AfficherPourcentage(val: Integer);
+begin
+  FPourcentage := EnsureRange(val, 0, 100);
+  PaintBox1.Invalidate;
 end;
 
 

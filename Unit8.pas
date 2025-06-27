@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, FireDAC.Comp.Client, FireDAC.Stan.Param,
-  System.UITypes, ShellAPI, Data.DB, Vcl.Printers; // <- ajouté pour éviter l'avertissement H2443
+  System.UITypes, ShellAPI, Data.DB, Vcl.Printers, Math; // <- ajouté pour éviter l'avertissement H2443
 
 type
   TForm8 = class(TForm)
@@ -47,11 +47,15 @@ type
     Panel9: TPanel;
     Shape11: TShape;
     Label16: TLabel;
+    Panel10: TPanel;
+    PaintBox1: TPaintBox;
+    Label17: TLabel;
     procedure Impr(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Label11Click(Sender: TObject);
     procedure Label16Click(Sender: TObject);
+    procedure PaintBox1Paint(Sender: TObject);
 
   private
     procedure RemplirComboBoxProjets;
@@ -65,11 +69,19 @@ type
     procedure MettreAJourStatsEnCoursGlobale;
     procedure MettreAJourBarreGlobaleStatut;
     procedure ImprimerFormulaire;
+    procedure RecuperationPourcentage(sender: TObject);
+
+
+
+
   public
+
   end;
 
 var
   Form8: TForm8;
+  PourcentageGlobal: integer;
+
 
 implementation
 
@@ -114,6 +126,12 @@ begin
     MettreAJourStatsTerminesGlobale;
     MettreAJourStatsEnCoursGlobale;
     MettreAJourBarreGlobaleStatut;
+
+
+
+    //affectation de la valeur au courbestats
+    RecuperationPourcentage(nil);
+
   end
   else
   begin
@@ -258,6 +276,12 @@ procedure TForm8.FormCreate(Sender: TObject);
 begin
   RemplirComboBoxProjets;
   MettreAJourStatsEnAttenteGlobale;
+  PaintBox1.Invalidate;
+
+
+
+
+
   if ComboBox1.Items.Count > 0 then
   begin
     ComboBox1.ItemIndex := 0;
@@ -414,6 +438,57 @@ begin
   end;
 end;
 
+
+
+procedure TForm8.PaintBox1Paint(Sender: TObject);
+var
+  R: TRect;
+  Center: TPoint;
+  Radius, InnerRadius: Integer;
+  AngleStart, AngleEnd: Double;
+  StartX, StartY, EndX, EndY: Integer;
+begin
+  // Définir la zone du cercle principal
+  R := Rect(10, 10, 210, 210);
+  Center.X := (R.Left + R.Right) div 2;
+  Center.Y := (R.Top + R.Bottom) div 2;
+  Radius := (R.Right - R.Left) div 2;
+  InnerRadius := Radius - 40;
+
+  // Effacer le fond
+  PaintBox1.Canvas.Brush.Color := clWhite;
+  PaintBox1.Canvas.FillRect(PaintBox1.ClientRect);
+
+  // Dessiner le fond gris (cercle complet)
+  PaintBox1.Canvas.Pen.Style := psClear;
+  PaintBox1.Canvas.Brush.Color := clSilver;
+  PaintBox1.Canvas.Ellipse(R);
+
+  // Dessiner la portion verte si FPourcentage > 0
+  if PourcentageGlobal > 0 then
+  begin
+    AngleStart := DegToRad(-90); // départ en haut
+    AngleEnd := DegToRad(-90 + (360 * PourcentageGlobal / 100));
+
+    StartX := Center.X + Round(Radius * Cos(AngleStart));
+    StartY := Center.Y + Round(Radius * Sin(AngleStart));
+    EndX := Center.X + Round(Radius * Cos(AngleEnd));
+    EndY := Center.Y + Round(Radius * Sin(AngleEnd));
+
+    PaintBox1.Canvas.Brush.Color := clGreen;
+        PaintBox1.Canvas.Pie(R.Left, R.Top, R.Right, R.Bottom,
+                         EndX, EndY, StartX, StartY);
+
+  end;
+
+  // Dessiner le cercle intérieur blanc (effet "donut")
+  PaintBox1.Canvas.Brush.Color := clWhite;
+  PaintBox1.Canvas.Ellipse(
+    Center.X - InnerRadius, Center.Y - InnerRadius,
+    Center.X + InnerRadius, Center.Y + InnerRadius
+  );
+  label17.caption := IntToStr(PourcentageGlobal) + '%';
+end;
 
 procedure TForm8.MettreAJourStatsEnCoursGlobale;
 var
@@ -583,6 +658,27 @@ procedure TForm8.Label16Click(Sender: TObject);
 begin
 self.close;
 end;
+
+
+procedure TForm8.RecuperationPourcentage(sender: TObject);
+var
+  valStr: string;
+  val: Integer;
+begin
+  // Nettoyage du texte : suppression de l'espace et du symbole %
+  valStr := StringReplace(Label4.Caption, '%', '', [rfReplaceAll]);
+  valStr := Trim(valStr);
+
+  // Conversion en entier
+  if TryStrToInt(valStr, val) then
+
+    PourcentageGlobal := val;
+    PaintBox1.Invalidate;
+   // ShowMessage(IntToStr(PourcentageGlobal));
+  //  ShowMessage('Valeur entière récupérée : ' + IntToStr(val));
+end;
+
+
 
 end.
 

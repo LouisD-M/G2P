@@ -643,6 +643,8 @@ object Form2: TForm2
         Color = clWhite
         ParentColor = False
         TabOrder = 0
+        ExplicitLeft = 58
+        ExplicitWidth = 1455
       end
     end
   end
