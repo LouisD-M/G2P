@@ -230,33 +230,26 @@ object Form6: TForm6
         Height = 23
         TabOrder = 1
       end
-      object Edit5: TEdit
-        Left = 287
-        Top = 255
-        Width = 434
-        Height = 23
-        TabOrder = 2
-      end
       object Edit6: TEdit
         Left = 287
         Top = 300
         Width = 434
         Height = 23
-        TabOrder = 3
+        TabOrder = 2
       end
       object Edit7: TEdit
         Left = 287
         Top = 345
         Width = 434
         Height = 23
-        TabOrder = 4
+        TabOrder = 3
       end
       object Edit8: TEdit
         Left = 287
         Top = 390
         Width = 434
         Height = 23
-        TabOrder = 5
+        TabOrder = 4
       end
       object Panel4: TPanel
         Left = 576
@@ -266,7 +259,7 @@ object Form6: TForm6
         BevelOuter = bvNone
         Color = clWhite
         ParentBackground = False
-        TabOrder = 6
+        TabOrder = 5
         object Shape3: TShape
           AlignWithMargins = True
           Left = 10
@@ -314,7 +307,7 @@ object Form6: TForm6
         BevelOuter = bvNone
         Color = clWhite
         ParentBackground = False
-        TabOrder = 7
+        TabOrder = 6
         object Shape4: TShape
           AlignWithMargins = True
           Left = 10
@@ -365,7 +358,7 @@ object Form6: TForm6
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 7
         Items.Strings = (
           'En cours'
           'Termin'#233
@@ -376,7 +369,7 @@ object Form6: TForm6
         Top = 67
         Width = 578
         Height = 23
-        TabOrder = 9
+        TabOrder = 8
       end
       object ComboBoxLierA: TComboBox
         Left = 287
@@ -389,7 +382,25 @@ object Form6: TForm6
         Font.Name = 'Roboto'
         Font.Style = []
         ParentFont = False
+        TabOrder = 9
+      end
+      object ComboBoxPriorite: TComboBox
+        Left = 287
+        Top = 261
+        Width = 434
+        Height = 22
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Roboto'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 10
+        Items.Strings = (
+          'Importante'
+          'Haute'
+          'Moyenne'
+          'Basse')
       end
     end
   end

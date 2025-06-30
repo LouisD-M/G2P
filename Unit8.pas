@@ -50,6 +50,12 @@ type
     Panel10: TPanel;
     PaintBox1: TPaintBox;
     Label17: TLabel;
+    Panel11: TPanel;
+    Label18: TLabel;
+    Panel12: TPanel;
+    Label19: TLabel;
+    Panel13: TPanel;
+    Label20: TLabel;
     procedure Impr(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -70,6 +76,8 @@ type
     procedure MettreAJourBarreGlobaleStatut;
     procedure ImprimerFormulaire;
     procedure RecuperationPourcentage(sender: TObject);
+    procedure AffichagePriorite(const titreProjet: string);
+    procedure AffichageStatut(const titreProjet: string);
 
 
 
@@ -126,6 +134,8 @@ begin
     MettreAJourStatsTerminesGlobale;
     MettreAJourStatsEnCoursGlobale;
     MettreAJourBarreGlobaleStatut;
+    AffichagePriorite(titreProjet);
+    AffichageStatut(titreProjet);
 
 
 
@@ -679,6 +689,72 @@ begin
 end;
 
 
+procedure TForm8.AffichagePriorite(const titreProjet: string);
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := Form2.FDConnection1;
+    Qry.SQL.Text := 'SELECT priorite FROM projet WHERE titre = :titreProjet';
+    Qry.ParamByName('titreProjet').AsString := titreProjet;
 
+    Qry.Open;
+
+    if not Qry.IsEmpty then
+      Label18.Caption := Qry.FieldByName('priorite').AsString;
+
+
+  finally
+
+  if Label18.Caption = 'Importante' then
+   Panel11.Color := clRed
+  else if Label18.Caption = 'Haute' then
+   Panel11.Color := clNavy
+  else if Label18.Caption = 'Moyenne' then
+   Panel11.Color := clGreen
+  else if Label18.Caption = 'Basse' then
+    Panel11.Color := clYellow;
+
+      //  ShowMessage('Valeur prio : ' + Qry.FieldByName('priorite').AsString);
+      //  ShowMessage('Titre reçu : ' + titreProjet);
+
+    Qry.Free;
+  end;
+end;
+
+procedure TForm8.AffichageStatut(const titreProjet: string);
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := Form2.FDConnection1;
+    Qry.SQL.Text := 'SELECT statut FROM projet WHERE titre = :titreProjet';
+    Qry.ParamByName('titreProjet').AsString := titreProjet;
+
+    Qry.Open;
+
+    if not Qry.IsEmpty then
+      Label19.Caption := Qry.FieldByName('statut').AsString;
+
+
+
+  finally
+
+         if Label19.Caption = 'En cours' then
+   Panel12.Color := clGreen;
+    if Label19.Caption = 'En Attente' then
+   Panel12.Color := clNavy;
+   if Label19.Caption = 'Terminé' then
+   Panel12.Color := clMoneyGreen;
+
+
+      //  ShowMessage('Valeur prio : ' + Qry.FieldByName('priorite').AsString);
+      //  ShowMessage('Titre reçu : ' + titreProjet);
+
+    Qry.Free;
+  end;
+end;
 end.
 

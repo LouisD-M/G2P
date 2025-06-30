@@ -25,7 +25,6 @@ type
     Label9: TLabel;
     Edit2: TEdit;
     Edit3: TEdit;
-    Edit5: TEdit;
     Edit6: TEdit;
     Edit7: TEdit;
     Edit8: TEdit;
@@ -44,6 +43,7 @@ type
     ComboBox3: TComboBox;
     ComboBoxLierA: TLabel;
     ComboBox4: TComboBox;
+    ComboBoxPriorite: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure Label11Click(Sender: TObject);
     procedure Label12Click(Sender: TObject);
@@ -173,7 +173,7 @@ begin
     Qry.ParamByName('responsable').AsString := Edit2.Text;
     Qry.ParamByName('date_debut').AsString := Edit3.Text;
     Qry.ParamByName('statut').AsString := ComboBoxStatut.Text;
-    Qry.ParamByName('priorite').AsString := Edit5.Text;
+    Qry.ParamByName('priorite').AsString := ComboBoxPriorite.Text;
     Qry.ParamByName('cout_reel').AsString := Edit6.Text;
     Qry.ParamByName('description').AsString := Edit7.Text;
     Qry.ParamByName('commentaires').AsString := Edit8.Text;
@@ -222,7 +222,7 @@ begin
     ComboBox2.ItemIndex := -1;
     Edit2.Clear;
     Edit3.Clear;
-    Edit5.Clear;
+    ComboBoxPriorite.Clear;
     Edit6.Clear;
     Edit7.Clear;
     Edit8.Clear;
@@ -253,7 +253,7 @@ begin
       Edit2.Text := Qry.FieldByName('responsable').AsString;
       Edit3.Text := Qry.FieldByName('date_debut').AsString;
       ComboBoxStatut.Text := Qry.FieldByName('statut').AsString;
-      Edit5.Text := Qry.FieldByName('priorite').AsString;
+      ComboBoxPriorite.Text := Qry.FieldByName('priorite').AsString;
       Edit6.Text := Qry.FieldByName('cout_reel').AsString;
       Edit7.Text := Qry.FieldByName('description').AsString;
       Edit8.Text := Qry.FieldByName('commentaires').AsString;

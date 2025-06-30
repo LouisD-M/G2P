@@ -24,7 +24,6 @@ type
     Label9: TLabel;
     Edit2: TEdit;
     Edit3: TEdit;
-    Edit5: TEdit;
     Edit6: TEdit;
     Edit7: TEdit;
     Edit8: TEdit;
@@ -38,6 +37,7 @@ type
     Edit1: TEdit;
     LabelLierA: TLabel;
     ComboBoxLierA: TComboBox;
+    ComboBoxPriorite: TComboBox;
     procedure Label11Click(Sender: TObject);
     procedure Label10Click(Sender: TObject);
 
@@ -100,7 +100,7 @@ begin
     qry.ParamByName('responsable').AsString := Edit2.Text;
     qry.ParamByName('date_debut').AsString := Edit3.Text;
     qry.ParamByName('statut').AsString := ComboBoxStatut.Text;
-    qry.ParamByName('priorite').AsString := Edit5.Text;
+    qry.ParamByName('priorite').AsString := ComboBoxPriorite.Text;
     qry.ParamByName('cout_reel').AsString := Edit6.Text;
     qry.ParamByName('description').AsString := Edit7.Text;
     qry.ParamByName('commentaires').AsString := Edit8.Text;

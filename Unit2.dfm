@@ -87,8 +87,8 @@ object Form2: TForm2
     object Panel10: TPanel
       AlignWithMargins = True
       Left = 3
-      Top = 550
-      Width = 373
+      Top = 460
+      Width = 379
       Height = 89
       Margins.Top = 100
       BevelOuter = bvNone
@@ -96,32 +96,33 @@ object Form2: TForm2
       ParentBackground = False
       TabOrder = 1
       object Label7: TLabel
-        Left = 0
-        Top = 0
-        Width = 373
-        Height = 89
+        AlignWithMargins = True
+        Left = 110
+        Top = 3
+        Width = 266
+        Height = 83
+        Margins.Left = 110
         Align = alClient
-        Alignment = taCenter
         Caption = 'PROJETS'
         Color = clNavy
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
-        Font.Height = -40
+        Font.Height = -33
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
         OnClick = Label7Click
-        ExplicitWidth = 170
-        ExplicitHeight = 48
+        ExplicitWidth = 140
+        ExplicitHeight = 39
       end
     end
     object Panel12: TPanel
       AlignWithMargins = True
       Left = 0
-      Top = 450
-      Width = 373
+      Top = 390
+      Width = 382
       Height = 89
       Margins.Top = 100
       BevelOuter = bvNone
@@ -129,32 +130,33 @@ object Form2: TForm2
       ParentBackground = False
       TabOrder = 2
       object Label9: TLabel
-        Left = 0
-        Top = 0
-        Width = 373
-        Height = 89
+        AlignWithMargins = True
+        Left = 110
+        Top = 3
+        Width = 269
+        Height = 83
+        Margins.Left = 110
         Align = alClient
-        Alignment = taCenter
         Caption = 'RECHERCHE'
         Color = clNavy
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
-        Font.Height = -40
+        Font.Height = -33
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
         OnClick = Label9Click
-        ExplicitWidth = 222
-        ExplicitHeight = 48
+        ExplicitWidth = 184
+        ExplicitHeight = 39
       end
     end
     object Panel13: TPanel
       AlignWithMargins = True
       Left = 0
-      Top = 650
-      Width = 373
+      Top = 520
+      Width = 382
       Height = 89
       Margins.Top = 100
       BevelOuter = bvNone
@@ -162,56 +164,59 @@ object Form2: TForm2
       ParentBackground = False
       TabOrder = 3
       object Label10: TLabel
-        Left = 0
-        Top = 0
-        Width = 373
-        Height = 89
+        AlignWithMargins = True
+        Left = 110
+        Top = 3
+        Width = 269
+        Height = 83
+        Margins.Left = 110
         Align = alClient
-        Alignment = taCenter
         Caption = 'PILOTES'
         Color = clNavy
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
-        Font.Height = -40
+        Font.Height = -33
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
         OnClick = Label10Click
-        ExplicitWidth = 157
-        ExplicitHeight = 48
+        ExplicitWidth = 129
+        ExplicitHeight = 39
       end
     end
     object Panel14: TPanel
-      AlignWithMargins = True
       Left = 0
-      Top = 750
-      Width = 373
+      Top = 580
+      Width = 382
       Height = 89
+      Margins.Left = 110
       Margins.Top = 100
+      Alignment = taLeftJustify
       BevelOuter = bvNone
       Color = 5254402
       ParentBackground = False
       TabOrder = 4
       object Label8: TLabel
-        Left = 0
-        Top = 0
-        Width = 373
-        Height = 89
+        AlignWithMargins = True
+        Left = 110
+        Top = 3
+        Width = 269
+        Height = 83
+        Margins.Left = 110
         Align = alClient
-        Alignment = taCenter
         Caption = 'EXPORT'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
-        Font.Height = -40
+        Font.Height = -33
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
         OnClick = Label8Click
-        ExplicitWidth = 148
-        ExplicitHeight = 48
+        ExplicitWidth = 123
+        ExplicitHeight = 39
       end
     end
     object Panel15: TPanel
@@ -258,23 +263,24 @@ object Form2: TForm2
       ParentBackground = False
       TabOrder = 6
       object Label12: TLabel
-        Left = 0
-        Top = 0
-        Width = 379
-        Height = 89
+        AlignWithMargins = True
+        Left = 110
+        Top = 3
+        Width = 266
+        Height = 83
+        Margins.Left = 110
         Align = alClient
-        Alignment = taCenter
         Caption = 'AJOUTER'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
-        Font.Height = -40
+        Font.Height = -33
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
         OnClick = Label12Click
-        ExplicitWidth = 172
-        ExplicitHeight = 48
+        ExplicitWidth = 143
+        ExplicitHeight = 39
       end
     end
     object Panel8: TPanel
@@ -294,23 +300,24 @@ object Form2: TForm2
       ParentFont = False
       TabOrder = 7
       object Label5: TLabel
-        Left = 0
-        Top = 0
-        Width = 385
-        Height = 41
+        AlignWithMargins = True
+        Left = 110
+        Top = 3
+        Width = 272
+        Height = 35
+        Margins.Left = 110
         Align = alClient
-        Alignment = taCenter
         Caption = 'MODIFIER'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
-        Font.Height = -40
+        Font.Height = -33
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
         OnClick = Label5Click
-        ExplicitWidth = 182
-        ExplicitHeight = 48
+        ExplicitWidth = 151
+        ExplicitHeight = 39
       end
     end
     object Panel11: TPanel
@@ -329,23 +336,24 @@ object Form2: TForm2
       ParentFont = False
       TabOrder = 8
       object Label13: TLabel
-        Left = 0
-        Top = 0
-        Width = 385
-        Height = 41
+        AlignWithMargins = True
+        Left = 110
+        Top = 3
+        Width = 272
+        Height = 35
+        Margins.Left = 110
         Align = alClient
-        Alignment = taCenter
         Caption = 'STATS'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
-        Font.Height = -40
+        Font.Height = -33
         Font.Name = 'Roboto'
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
         OnClick = Label13Click
-        ExplicitWidth = 121
-        ExplicitHeight = 48
+        ExplicitWidth = 99
+        ExplicitHeight = 39
       end
     end
   end
@@ -643,8 +651,7 @@ object Form2: TForm2
         Color = clWhite
         ParentColor = False
         TabOrder = 0
-        ExplicitLeft = 58
-        ExplicitWidth = 1455
+        ExplicitLeft = 175
       end
     end
   end
