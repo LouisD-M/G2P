@@ -356,6 +356,39 @@ object Form2: TForm2
         ExplicitHeight = 39
       end
     end
+    object Panel17: TPanel
+      Left = 3
+      Top = 640
+      Width = 382
+      Height = 89
+      Margins.Left = 110
+      Margins.Top = 100
+      Alignment = taLeftJustify
+      BevelOuter = bvNone
+      Color = 5254402
+      ParentBackground = False
+      TabOrder = 9
+      object Label14: TLabel
+        AlignWithMargins = True
+        Left = 110
+        Top = 3
+        Width = 269
+        Height = 83
+        Margins.Left = 110
+        Align = alClient
+        Caption = 'LOG'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -33
+        Font.Name = 'Roboto'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Layout = tlCenter
+        OnClick = Label14Click
+        ExplicitWidth = 63
+        ExplicitHeight = 39
+      end
+    end
   end
   object Panel2: TPanel
     Left = 385
@@ -651,7 +684,6 @@ object Form2: TForm2
         Color = clWhite
         ParentColor = False
         TabOrder = 0
-        ExplicitLeft = 175
       end
     end
   end

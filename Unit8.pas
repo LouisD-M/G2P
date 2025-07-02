@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, FireDAC.Comp.Client, FireDAC.Stan.Param,
-  System.UITypes, ShellAPI, Data.DB, Vcl.Printers, Math; // <- ajouté pour éviter l'avertissement H2443
+  System.UITypes, ShellAPI, Data.DB, Vcl.Printers, Math, unit11; // <- ajouté pour éviter l'avertissement H2443
 
 type
   TForm8 = class(TForm)
@@ -56,6 +56,9 @@ type
     Label19: TLabel;
     Panel13: TPanel;
     Label20: TLabel;
+    Shape12: TShape;
+    Shape13: TShape;
+    Shape14: TShape;
     procedure Impr(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -78,6 +81,7 @@ type
     procedure RecuperationPourcentage(sender: TObject);
     procedure AffichagePriorite(const titreProjet: string);
     procedure AffichageStatut(const titreProjet: string);
+    procedure AffichageResponsable(const titreProjet: string);
 
 
 
@@ -136,6 +140,7 @@ begin
     MettreAJourBarreGlobaleStatut;
     AffichagePriorite(titreProjet);
     AffichageStatut(titreProjet);
+    AffichageResponsable(titreProjet);
 
 
 
@@ -661,11 +666,23 @@ begin
 end;
 procedure TForm8.Label11Click(Sender: TObject);
 begin
+ begin
+  if not Assigned(Form11) then
+    Form11 := TForm11.Create(Application); // ou Self selon le contexte
+
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "Sauvegarde en pdf depuis la page Stats"');
+end;
 ImprimerFormulaire;
 end;
 
 procedure TForm8.Label16Click(Sender: TObject);
 begin
+ begin
+  if not Assigned(Form11) then
+    Form11 := TForm11.Create(Application); // ou Self selon le contexte
+
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "Quitter de la page stats"');
+end;
 self.close;
 end;
 
@@ -708,13 +725,13 @@ begin
   finally
 
   if Label18.Caption = 'Importante' then
-   Panel11.Color := clRed
+     Shape12.Brush.Color := clRed
   else if Label18.Caption = 'Haute' then
-   Panel11.Color := clNavy
+   Shape12.Brush.Color := clNavy
   else if Label18.Caption = 'Moyenne' then
-   Panel11.Color := clGreen
+   Shape12.Brush.Color := clGreen
   else if Label18.Caption = 'Basse' then
-    Panel11.Color := clYellow;
+    Shape12.Brush.Color := clYellow;
 
       //  ShowMessage('Valeur prio : ' + Qry.FieldByName('priorite').AsString);
       //  ShowMessage('Titre reçu : ' + titreProjet);
@@ -734,7 +751,7 @@ begin
     Qry.ParamByName('titreProjet').AsString := titreProjet;
 
     Qry.Open;
-
+    //panel12.Visible := False;
     if not Qry.IsEmpty then
       Label19.Caption := Qry.FieldByName('statut').AsString;
 
@@ -742,12 +759,53 @@ begin
 
   finally
 
-         if Label19.Caption = 'En cours' then
-   Panel12.Color := clGreen;
-    if Label19.Caption = 'En Attente' then
-   Panel12.Color := clNavy;
-   if Label19.Caption = 'Terminé' then
-   Panel12.Color := clMoneyGreen;
+        if Label19.Caption = 'En cours' then
+        begin
+          Shape13.Brush.Color := $00C77AAA;
+        end
+        else if Label19.Caption = 'En Attente' then
+        begin
+          Shape13.Brush.Color := clNavy;
+        end
+        else if Label19.Caption = 'Terminé' then
+        begin
+          Shape13.Brush.Color := clGreen;
+        end;
+
+
+
+
+      //  ShowMessage('Valeur prio : ' + Qry.FieldByName('priorite').AsString);
+      //  ShowMessage('Titre reçu : ' + titreProjet);
+
+    Qry.Free;
+  end;
+end;
+
+
+
+procedure TForm8.AffichageResponsable(const titreProjet: string);
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := Form2.FDConnection1;
+    Qry.SQL.Text := 'SELECT responsable FROM projet WHERE titre = :titreProjet';
+    Qry.ParamByName('titreProjet').AsString := titreProjet;
+
+    Qry.Open;
+
+    if not Qry.IsEmpty then
+      Label20.Caption := Qry.FieldByName('responsable').AsString;
+
+
+
+  finally
+
+    if Label20.Caption <> '' then
+      Shape14.Brush.Color := $00D1F0EF;
+
 
 
       //  ShowMessage('Valeur prio : ' + Qry.FieldByName('priorite').AsString);

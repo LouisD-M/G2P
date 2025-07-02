@@ -12,7 +12,7 @@ uses
   Unit3, // On importe le design de la "carte" projet (TFrame3)
   FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.Phys.Intf,
   FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteWrapper.Stat, Unit1, unit5,
-  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.Comp.DataSet, Unit8;
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.Comp.DataSet, Unit8, unit11;
 
 type
   // Déclaration de la fenêtre principale
@@ -37,6 +37,8 @@ type
     Panel11: TPanel;
     Label13: TLabel;
     FDQuery1: TFDQuery;
+    Panel17: TPanel;
+    Label14: TLabel;
 
     // Événement : lorsqu'on clique sur un label (ex: bouton de test)
     procedure Label11Click(Sender: TObject);
@@ -52,6 +54,7 @@ type
     procedure Label6Click(Sender: TObject);
     procedure Label5Click(Sender: TObject);
     procedure Label13Click(Sender: TObject);
+    procedure Label14Click(Sender: TObject);
 
 
   private
@@ -237,6 +240,12 @@ begin
     PanelProjets.AutoScroll := True;
     PanelProjets.Realign;
     PanelProjets.Invalidate;
+     begin
+  if not Assigned(Form11) then
+    Form11 := TForm11.Create(Application); // ou Self selon le contexte
+
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "Pilotes"');
+end;
 
   finally
     Qry.Free;
@@ -245,6 +254,12 @@ end;
 
 procedure TForm2.Label11Click(Sender: TObject);
 begin
+ begin
+  if not Assigned(Form11) then
+    Form11 := TForm11.Create(Application); // ou Self selon le contexte
+
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "Quitter"');
+end;
  self.close();
 end;
 
@@ -267,6 +282,12 @@ procedure TForm2.Label5Click(Sender: TObject);
 begin
   Form7.ShowModal;
   ChargerStatutsProjets;
+   begin
+  if not Assigned(Form11) then
+    Form11 := TForm11.Create(Application); // ou Self selon le contexte
+
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "Modifier"');
+end;
 
 end;
 
@@ -274,14 +295,42 @@ procedure TForm2.Label12Click(Sender: TObject);
 begin
   Form6.ShowModal;
   ChargerStatutsProjets;
+ begin
+  if not Assigned(Form11) then
+    Form11 := TForm11.Create(Application); // ou Self selon le contexte
+
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "Ajouté"');
+end;
 
 end;
 
 procedure TForm2.Label13Click(Sender: TObject);
 begin
 Form8.ShowModal;
+ begin
+  if not Assigned(Form11) then
+    Form11 := TForm11.Create(Application); // ou Self selon le contexte
+
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "Stats"');
+end;
 end;
 
+procedure TForm2.Label14Click(Sender: TObject);
+begin
+  Form11 := TForm11.Create(Self);
+  try
+    Form11.AfficherLogDepuisFichier('\\pinas03\uf0330-com\G2P\log.txt'); // à adapter selon ton chemin
+    Form11.ShowModal;
+     begin
+  if not Assigned(Form11) then
+    Form11 := TForm11.Create(Application); // ou Self selon le contexte
+
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "Logs"');
+end;
+  finally
+    Form11.Free;
+  end;
+end;
 procedure TForm2.Label6Click(Sender: TObject);
 begin
 
@@ -348,6 +397,12 @@ begin
     PanelProjets.AutoScroll := True;
     PanelProjets.Realign;
     PanelProjets.Invalidate;
+     begin
+  if not Assigned(Form11) then
+    Form11 := TForm11.Create(Application); // ou Self selon le contexte
+
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "Projets"');
+end;
 
   finally
     Qry.Free;
@@ -399,6 +454,12 @@ begin
       end;
     end;
   finally
+   begin
+  if not Assigned(Form11) then
+    Form11 := TForm11.Create(Application); // ou Self selon le contexte
+
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "Export"');
+end;
     Qry.Free;
   end;
 end;
@@ -469,6 +530,12 @@ begin
       PanelProjets.AutoScroll := True;
       PanelProjets.Realign;
       PanelProjets.Invalidate;
+       begin
+  if not Assigned(Form11) then
+    Form11 := TForm11.Create(Application); // ou Self selon le contexte
+
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "recherche"');
+end;
 
     finally
       Qry.Free;

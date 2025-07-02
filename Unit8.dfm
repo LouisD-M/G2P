@@ -408,8 +408,7 @@ object Form8: TForm8
         ParentFont = False
         Layout = tlCenter
         OnClick = Label16Click
-        ExplicitWidth = 61
-        ExplicitHeight = 24
+        ExplicitLeft = 3
       end
     end
   end
@@ -577,6 +576,24 @@ object Form8: TForm8
       Color = clWhite
       ParentBackground = False
       TabOrder = 3
+      object Shape12: TShape
+        AlignWithMargins = True
+        Left = 10
+        Top = 10
+        Width = 230
+        Height = 85
+        Margins.Left = 10
+        Margins.Top = 10
+        Margins.Right = 10
+        Margins.Bottom = 10
+        Align = alClient
+        Pen.Style = psClear
+        Shape = stRoundRect
+        ExplicitLeft = 104
+        ExplicitTop = 56
+        ExplicitWidth = 65
+        ExplicitHeight = 65
+      end
       object Label18: TLabel
         Left = 0
         Top = 0
@@ -605,6 +622,24 @@ object Form8: TForm8
       Color = clWhite
       ParentBackground = False
       TabOrder = 4
+      object Shape13: TShape
+        AlignWithMargins = True
+        Left = 10
+        Top = 10
+        Width = 230
+        Height = 80
+        Margins.Left = 10
+        Margins.Top = 10
+        Margins.Right = 10
+        Margins.Bottom = 10
+        Align = alClient
+        Pen.Style = psClear
+        Shape = stRoundRect
+        ExplicitLeft = 40
+        ExplicitTop = 16
+        ExplicitWidth = 65
+        ExplicitHeight = 65
+      end
       object Label19: TLabel
         Left = 0
         Top = 0
@@ -613,9 +648,9 @@ object Form8: TForm8
         Align = alClient
         Alignment = taCenter
         Caption = 'Label18'
-        Color = clBlack
+        Color = clWhite
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
+        Font.Color = clWhite
         Font.Height = -27
         Font.Name = 'Roboto'
         Font.Style = []
@@ -629,31 +664,43 @@ object Form8: TForm8
     object Panel13: TPanel
       Left = 1200
       Top = 200
-      Width = 250
+      Width = 660
       Height = 200
       BevelOuter = bvNone
       Color = clWhite
       ParentBackground = False
       TabOrder = 5
+      object Shape14: TShape
+        Left = 0
+        Top = 0
+        Width = 660
+        Height = 200
+        Align = alClient
+        Pen.Style = psClear
+        ExplicitLeft = 176
+        ExplicitTop = 144
+        ExplicitWidth = 65
+        ExplicitHeight = 65
+      end
       object Label20: TLabel
         Left = 0
         Top = 0
-        Width = 250
+        Width = 660
         Height = 200
         Align = alClient
         Alignment = taCenter
         Caption = 'Label18'
         Color = clBlack
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -27
+        Font.Color = clNavy
+        Font.Height = -40
         Font.Name = 'Roboto'
         Font.Style = []
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-        ExplicitWidth = 96
-        ExplicitHeight = 33
+        ExplicitWidth = 144
+        ExplicitHeight = 48
       end
     end
   end
