@@ -1,7 +1,7 @@
 object Form11: TForm11
   Left = 0
   Top = 0
-  Caption = 'Form11'
+  Caption = 'Log'
   ClientHeight = 441
   ClientWidth = 624
   Color = clBtnFace

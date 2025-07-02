@@ -2544,7 +2544,6 @@ object Form5: TForm5
       Caption = 'Imprimer'
       TabOrder = 0
       OnClick = BtnImprimerClick
-      ExplicitTop = 4
     end
   end
   object Panel2: TPanel
@@ -2560,7 +2559,7 @@ object Form5: TForm5
     object LabelStatut: TLabel
       AlignWithMargins = True
       Left = 100
-      Top = 71
+      Top = 70
       Width = 1297
       Height = 39
       Margins.Left = 100
@@ -2572,8 +2571,7 @@ object Form5: TForm5
       Font.Name = 'Roboto'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 0
-      ExplicitTop = 49
+      ExplicitTop = 71
       ExplicitWidth = 148
     end
     object LabelResponsable: TLabel
@@ -2581,7 +2579,7 @@ object Form5: TForm5
       Left = 100
       Top = 25
       Width = 1297
-      Height = 40
+      Height = 39
       Margins.Left = 100
       Margins.Top = 25
       Align = alTop
@@ -2592,13 +2590,12 @@ object Form5: TForm5
       Font.Name = 'Roboto'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 136
-      ExplicitWidth = 1261
+      ExplicitWidth = 148
     end
     object LabelPriorite: TLabel
       AlignWithMargins = True
       Left = 100
-      Top = 116
+      Top = 115
       Width = 1297
       Height = 39
       Margins.Left = 100
@@ -2610,14 +2607,13 @@ object Form5: TForm5
       Font.Name = 'Roboto'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 0
-      ExplicitTop = 88
+      ExplicitTop = 116
       ExplicitWidth = 148
     end
     object LabelCout_Reel: TLabel
       AlignWithMargins = True
       Left = 100
-      Top = 206
+      Top = 205
       Width = 1297
       Height = 39
       Margins.Left = 100
@@ -2629,15 +2625,14 @@ object Form5: TForm5
       Font.Name = 'Roboto'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 0
-      ExplicitTop = 186
+      ExplicitTop = 206
       ExplicitWidth = 148
     end
     object LabelDescription: TLabel
       AlignWithMargins = True
       Left = 20
       Top = 260
-      Width = 1400
+      Width = 97
       Height = 15
       Margins.Top = 0
       Caption = 'LabelDescription'
@@ -2661,13 +2656,12 @@ object Form5: TForm5
       Font.Name = 'Roboto'
       Font.Style = []
       ParentFont = False
-      ExplicitTop = 235
       ExplicitWidth = 58
     end
     object LabelDate: TLabel
       AlignWithMargins = True
       Left = 100
-      Top = 161
+      Top = 160
       Width = 1297
       Height = 39
       Margins.Left = 100
@@ -2679,8 +2673,7 @@ object Form5: TForm5
       Font.Name = 'Roboto'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 0
-      ExplicitTop = 117
+      ExplicitTop = 161
       ExplicitWidth = 148
     end
     object Image2: TImage

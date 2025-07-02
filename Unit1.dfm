@@ -24,7 +24,6 @@ object Form1: TForm1
     Margins.Right = 50
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 300
   end
   object Button1: TButton
     AlignWithMargins = True
@@ -45,8 +44,7 @@ object Form1: TForm1
     ModalResult = 1
     ParentFont = False
     TabOrder = 1
-    ExplicitLeft = 15
-    ExplicitTop = 119
+    OnClick = Button1Click
   end
   object Panel1: TPanel
     Left = 0
@@ -59,7 +57,6 @@ object Form1: TForm1
     Color = 5254402
     ParentBackground = False
     TabOrder = 2
-    ExplicitWidth = 400
     object Shape1: TShape
       Left = 0
       Top = 0

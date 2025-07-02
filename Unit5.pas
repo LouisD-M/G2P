@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Imaging.pngimage,   Vcl.Printers,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Imaging.pngimage,   Vcl.Printers, Unit11,
   Vcl.ExtCtrls;
 
 type
@@ -55,6 +55,14 @@ begin
       Printer.EndDoc;
     end;
   end;
+   begin
+  if not Assigned(Form11) then
+    Form11 := TForm11.Create(Application); // ou Self selon le contexte
+
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "Imprimer de exporter la liste"');
+  end;
+
+
 end;
 procedure TForm5.FormCreate(Sender: TObject);
 begin

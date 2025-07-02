@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, FireDAC.Comp.Client, FireDAC.Stan.Param,
-  System.UITypes, ShellAPI, Data.DB, Vcl.Printers, Math, unit11; // <- ajouté pour éviter l'avertissement H2443
+  System.UITypes, ShellAPI, Data.DB, Vcl.Printers, Math, unit11, Vcl.Imaging.pngimage, Clipbrd; // <- ajouté pour éviter l'avertissement H2443
 
 type
   TForm8 = class(TForm)
@@ -82,6 +82,8 @@ type
     procedure AffichagePriorite(const titreProjet: string);
     procedure AffichageStatut(const titreProjet: string);
     procedure AffichageResponsable(const titreProjet: string);
+    procedure CaptureDecranWindows;
+    procedure SauverImagePressePapiers(const Dossier: string);
 
 
 
@@ -93,6 +95,7 @@ type
 var
   Form8: TForm8;
   PourcentageGlobal: integer;
+  titreProjet: string;
 
 
 implementation
@@ -101,6 +104,7 @@ uses
   Unit2;
 
 {$R *.dfm}
+function PrintWindow(hWnd: HWND; hDC: HDC; nFlags: UINT): BOOL; stdcall; external 'user32.dll';
 
 // Remplit ComboBox1 avec les titres de projets
 procedure TForm8.RemplirComboBoxProjets;
@@ -124,8 +128,6 @@ begin
 end;
 
 procedure TForm8.ComboBox1Change(Sender: TObject);
-var
-  titreProjet: string;
 begin
   if ComboBox1.ItemIndex >= 0 then
   begin
@@ -608,7 +610,8 @@ end;
 
 
 
-procedure TForm8.ImprimerFormulaire;    //Modification en save vers un pdf horizontal
+  //Modification en save vers un pdf horizontal
+procedure TForm8.ImprimerFormulaire;
 var
   bmp: TBitmap;
   SaveDialog: TSaveDialog;
@@ -625,7 +628,6 @@ begin
     begin
       PDFPath := SaveDialog.FileName;
 
-      // Sélectionner "Microsoft Print to PDF"
       Printer.PrinterIndex := Printer.Printers.IndexOf('Microsoft Print to PDF');
       if Printer.PrinterIndex = -1 then
       begin
@@ -633,10 +635,7 @@ begin
         Exit;
       end;
 
-      // Mode paysage
       Printer.Orientation := poLandscape;
-
-      // Démarre l’impression
       Printer.Title := PDFPath;
       Printer.BeginDoc;
       try
@@ -644,12 +643,23 @@ begin
         try
           bmp.Width := Self.ClientWidth;
           bmp.Height := Self.ClientHeight;
+
+          // 🔁 Forcer le rendu AVANT de capturer
+          PaintBox1.Repaint;
+          Label17.Update;
+          Label18.Update;
+          Label19.Update;
+          Label20.Update;
+          Shape12.Repaint;
+          Shape13.Repaint;
+          Shape14.Repaint;
+
+          // 🖼️ Capturer le formulaire dans un bitmap
           Self.PaintTo(bmp.Canvas.Handle, 0, 0);
 
-          // Ajuste le dessin à la page entière
+          // 📄 Imprimer sur la page
           R := Rect(0, 0, Printer.PageWidth, Printer.PageHeight);
           Printer.Canvas.StretchDraw(R, bmp);
-
         finally
           bmp.Free;
         end;
@@ -657,7 +667,6 @@ begin
         Printer.EndDoc;
       end;
 
-      // Ouvre le PDF généré
       ShellExecute(0, 'open', PChar(PDFPath), nil, nil, SW_SHOWNORMAL);
     end;
   finally
@@ -670,9 +679,18 @@ begin
   if not Assigned(Form11) then
     Form11 := TForm11.Create(Application); // ou Self selon le contexte
 
-  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "Sauvegarde en pdf depuis la page Stats"');
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "Sauvegarde en PNG"');
 end;
-ImprimerFormulaire;
+
+ CaptureDecranWindows; // ton raccourci Win+Shift+S écran entier
+ ShellExecute(0, 'open', PChar('\\pinas03\uf0330-com\G2P\Export\'), nil, nil, SW_SHOWNORMAL);
+
+ //ImprimerFormulaire;
+end;
+
+procedure OuvrirDossier(const Dossier: string);
+begin
+  ShellExecute(0, 'open', PChar(Dossier), nil, nil, SW_SHOWNORMAL);
 end;
 
 procedure TForm8.Label16Click(Sender: TObject);
@@ -813,6 +831,47 @@ begin
 
     Qry.Free;
   end;
+end;
+
+
+
+procedure TForm8.CaptureDecranWindows;
+begin
+  keybd_event(VK_SNAPSHOT, 0, 0, 0);                // PrtSc appuyée
+  keybd_event(VK_SNAPSHOT, 0, KEYEVENTF_KEYUP, 0);  // PrtSc relâchée
+  Sleep(200); // attendre l'arrivée dans le presse-papiers
+  SauverImagePressePapiers('\\pinas03\uf0330-com\G2P\Export\');
+end;
+
+procedure TForm8.SauverImagePressePapiers(const Dossier: string);
+var
+  bmp: TBitmap;
+  png: TPngImage;
+  NomFichier: string;
+begin
+  if Clipboard.HasFormat(CF_BITMAP) then
+  begin
+    bmp := TBitmap.Create;
+    try
+      // Utilise le handle d'image du presse-papiers
+      bmp.Handle := Clipboard.GetAsHandle(CF_BITMAP);
+
+      png := TPngImage.Create;
+      try
+        png.Assign(bmp);
+        NomFichier := IncludeTrailingPathDelimiter(Dossier) +
+                      'Capture_' + titreProjet + ' ' + FormatDateTime('yyyymmdd_hhnnss', Now) + '.png';
+        png.SaveToFile(NomFichier);
+        ShowMessage('✅ Capture enregistrée dans : ' + NomFichier);
+      finally
+        png.Free;
+      end;
+    finally
+      bmp.Free;
+    end;
+  end
+  else
+    ShowMessage('⚠️ Aucune image détectée dans le presse-papiers.');
 end;
 end.
 

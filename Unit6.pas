@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, FireDAC.Comp.Client, Unit2, Data.DB;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, FireDAC.Comp.Client, Unit2, Data.DB, unit11;
 
 type
   TForm6 = class(TForm)
@@ -127,11 +127,25 @@ end;
 procedure TForm6.Label10Click(Sender: TObject);
 begin
   InsererProjet(Form2.FDConnection1);
+   begin
+  if not Assigned(Form11) then
+    Form11 := TForm11.Create(Application); // ou Self selon le contexte
+
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "Ajouter un projet depuis la page ajouter"');
+end;
+
 end;
 
 procedure TForm6.Label11Click(Sender: TObject);
 begin
   Self.Close;
+   begin
+  if not Assigned(Form11) then
+    Form11 := TForm11.Create(Application); // ou Self selon le contexte
+
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "Quitter de la page ajout projet"');
+end;
+
 end;
 
 // ✅ AJOUT : Code manquant – Chargement des titres dans la ComboBox

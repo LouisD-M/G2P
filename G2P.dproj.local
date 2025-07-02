@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2025/06/10 13:14:41.000.040,=D:\Unit1.pas</Transaction>
+    <Transaction>2025/06/10 13:15:02.000.513,D:\Delphi\Gestion2projet2.0\Unit1.dfm=D:\Unit1.dfm</Transaction>
+    <Transaction>2025/06/10 13:15:02.000.513,D:\Delphi\Gestion2projet2.0\Unit1.pas=D:\Unit1.pas</Transaction>
+    <Transaction>2025/06/10 13:15:05.000.308,D:\Delphi\Gestion2projet2.0\Project1.dproj=D:\Project1.dproj</Transaction>
+    <Transaction>2025/06/11 14:40:43.000.727,=D:\Delphi\Gestion2projet2.0\Unit3.pas</Transaction>
+    <Transaction>2025/06/11 15:44:32.000.373,D:\Delphi\Gestion2projet2.0\Unit1.pas=</Transaction>
+    <Transaction>2025/06/11 16:22:39.000.797,D:\Delphi\Gestion2projet2.0\Project1.dproj=D:\Delphi\G2P3.0\Project1.dproj</Transaction>
+    <Transaction>2025/06/12 13:35:28.000.943,D:\Delphi\G2P3.0\Unit2.pas=D:\Delphi\Gestion2projet2.0\Unit2.pas</Transaction>
+    <Transaction>2025/06/12 13:35:28.000.943,D:\Delphi\G2P3.0\Unit2.dfm=D:\Delphi\Gestion2projet2.0\Unit2.dfm</Transaction>
+    <Transaction>2025/06/12 14:10:39.000.230,=D:\Delphi\G2P3.0\Unit1.pas</Transaction>
+    <Transaction>2025/06/12 14:11:05.000.766,D:\Delphi\G2P3.0\unit4.pas=D:\Delphi\G2P3.0\Unit1.pas</Transaction>
+    <Transaction>2025/06/12 14:11:05.000.766,D:\Delphi\G2P3.0\unit4.dfm=D:\Delphi\G2P3.0\Unit1.dfm</Transaction>
+    <Transaction>2025/06/12 14:13:17.000.868,D:\Delphi\G2P3.0\unit4.pas=</Transaction>
+    <Transaction>2025/06/12 14:13:45.000.988,=D:\Delphi\G2P3.0\Unit1.pas</Transaction>
+    <Transaction>2025/06/12 14:36:01.000.988,=D:\Delphi\G2P3.0\Unit5.pas</Transaction>
+    <Transaction>2025/06/12 15:10:36.000.252,=D:\Delphi\G2P3.0\Unit6.pas</Transaction>
+    <Transaction>2025/06/13 13:38:42.000.035,=D:\Delphi\G2P3.0\Unit7.pas</Transaction>
+    <Transaction>2025/06/13 14:53:38.000.373,D:\Delphi\G2P3.0\Unit3.dfm=D:\Delphi\Gestion2projet2.0\Unit3.dfm</Transaction>
+    <Transaction>2025/06/13 14:53:38.000.373,D:\Delphi\G2P3.0\Unit3.pas=D:\Delphi\Gestion2projet2.0\Unit3.pas</Transaction>
+    <Transaction>2025/06/19 16:03:31.000.751,=D:\Delphi\G2P3.0\Unit8.pas</Transaction>
+    <Transaction>2025/06/19 16:10:22.000.598,=D:\Delphi\G2P3.0\Unit8.pas</Transaction>
+    <Transaction>2025/06/23 14:24:03.000.415,=D:\Delphi\G2P3.0\Unit9.pas</Transaction>
+    <Transaction>2025/06/23 14:27:30.000.569,D:\Delphi\G2P3.0\Unit9.pas=</Transaction>
+    <Transaction>2025/06/27 12:18:10.000.679,=D:\Delphi\G2P3.0\Courbestats.pas</Transaction>
+    <Transaction>2025/06/27 15:10:03.000.321,D:\Delphi\G2P3.0\Courbestats.pas=</Transaction>
+    <Transaction>2025/07/01 14:32:43.047,=D:\Delphi\G2P3.0\Unit11.pas</Transaction>
+    <Transaction>2025/07/02 11:12:19.239,D:\Delphi\G2P3.0\G2P.dproj=D:\Delphi\G2P3.0\Project1.dproj</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="Unit2.pas"/>
+    <File Path="Unit2.dfm"/>
+    <File Path="Unit3.pas"/>
+    <File Path="Unit3.dfm"/>
+    <File Path="Unit1.pas"/>
+    <File Path="Unit1.dfm"/>
+    <File Path="Unit5.pas"/>
+    <File Path="Unit5.dfm"/>
+    <File Path="Unit6.pas"/>
+    <File Path="Unit6.dfm"/>
+    <File Path="Unit7.pas"/>
+    <File Path="Unit7.dfm"/>
+    <File Path="Unit8.pas"/>
+    <File Path="Unit8.dfm"/>
+    <File Path="Unit11.pas"/>
+    <File Path="Unit11.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>

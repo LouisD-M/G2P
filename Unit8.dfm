@@ -237,7 +237,7 @@ object Form8: TForm8
         Height = 47
         Align = alClient
         Alignment = taCenter
-        Caption = 'Sauvegarder en PDF'
+        Caption = 'Export en PNG'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
         Font.Height = -20
@@ -246,7 +246,7 @@ object Form8: TForm8
         ParentFont = False
         Layout = tlCenter
         OnClick = Label11Click
-        ExplicitWidth = 180
+        ExplicitWidth = 129
         ExplicitHeight = 24
       end
     end
@@ -408,7 +408,8 @@ object Form8: TForm8
         ParentFont = False
         Layout = tlCenter
         OnClick = Label16Click
-        ExplicitLeft = 3
+        ExplicitWidth = 61
+        ExplicitHeight = 24
       end
     end
   end

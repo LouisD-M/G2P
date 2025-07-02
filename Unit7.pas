@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, unit2, FireDAC.Comp.Client, FireDAC.Stan.Param,Data.DB, // <--- ajout important
-  System.UITypes;
+  System.UITypes, unit11;
 
 type
   TForm7 = class(TForm)
@@ -183,6 +183,13 @@ begin
 
     ShowMessage('Modifications enregistrées avec succès.');
   finally
+   begin
+  if not Assigned(Form11) then
+    Form11 := TForm11.Create(Application); // ou Self selon le contexte
+
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "Modifier un projet depuis la page"');
+end;
+
     Qry.Free;
     Self.Close;
   end;
@@ -191,6 +198,13 @@ end;
 procedure TForm7.Label11Click(Sender: TObject);
 begin
 self.close;
+ begin
+  if not Assigned(Form11) then
+    Form11 := TForm11.Create(Application); // ou Self selon le contexte
+
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "Quitter depuis la page modification d un projet"');
+end;
+
 end;
 
 procedure TForm7.Label12Click(Sender: TObject);
@@ -232,6 +246,13 @@ begin
   finally
     Qry.Free;
   end;
+   begin
+  if not Assigned(Form11) then
+    Form11 := TForm11.Create(Application); // ou Self selon le contexte
+
+  Form11.AjoutDansLog('L’utilisateur a cliqué sur le bouton "supprimer un projet"');
+end;
+
   self.close;
 end;
 
